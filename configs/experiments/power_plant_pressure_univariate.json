@@ -1,0 +1,6 @@
+{
+  "name": "power_plant_pressure_univariate",
+  "dataset": "configs/datasets/power_plant/dataset.json",
+  "task": "configs/tasks/univariate_detection.json",
+  "model": "configs/models/non_iid_threshold_delay_search.json"
+}

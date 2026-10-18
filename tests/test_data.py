@@ -112,3 +112,41 @@ def test_mat_values_missing_settings_and_continuity_survive_two_adapters(tmp_pat
     config["roles"]["evaluation"]["start_index"] = 4
     with pytest.raises(ValueError, match="overlap"):
         prepare_power(bundle, config)
+
+
+def test_explicit_unknown_source_survives_to_task_but_mode_only_is_not_truth():
+    from iia_benchmark.data.datasets.power_plant.task_adapters.univariate import prepare as prepare_power
+    from iia_benchmark.tasks.base import Detection, Reference
+    from iia_benchmark.tasks.univariate.contracts import UnivariatePrediction
+    from iia_benchmark.tasks.univariate.methods.base import UnivariateMethod
+    from iia_benchmark.tasks.univariate.task import UnivariateTask
+    class ProxyMethod(UnivariateMethod):
+        def design(self, view):
+            pass
+        def predict(self, view):
+            segment = view.segments[0]
+            return UnivariatePrediction((Detection(segment.run_id, segment.timestamps, np.ones(6, bool)),), {},
+                                         (Reference(np.ones(6), "test proxy", "tag"),))
+    frame = pd.DataFrame({"run_id": "r", "timestamp": np.arange(9, dtype=float), "tag_id": "x",
+                          "value": [8.]*3+[12.]*6, "quality_flag": True})
+    setting = pd.DataFrame([{"tag_id": "x", "direction": "high", "threshold": 10.}])
+    event = {"run_id": "r", "start": 3., "stop": 9., "state": -1, "source": "explicit unverified reference",
+             "scope": "tag", "tag_id": "x"}
+    config = {"tag_id": "x", "direction": "high", "roles": {
+        "design": {"run_id": "r", "start_index": 0, "stop_index": 3},
+        "evaluation": {"run_id": "r", "start_index": 3, "stop_index": 9}},
+        "baseline_replay": "declared_instant_threshold_assumption"}
+    task = UnivariateTask({})
+    for extra, expected in [({}, [-1]*6), ({"operating_mode": "steady"}, [1]*6),
+                             ({"operating_mode": "steady", "event_kind": "reference"}, [-1]*6)]:
+        bundle = DatasetBundle(frame, tag_alarm_settings=setting, status_events=pd.DataFrame([dict(event, **extra)]))
+        data = prepare_power(bundle, config)
+        result = task.run(data, ProxyMethod())
+        assert result.predictions.reference_state.tolist() == expected
+        if expected[0] == -1:
+            assert result.metrics["F1"]["status"] == "unavailable"
+            assert result.details["references"][0]["source"] == event["source"]
+        else:
+            assert data.references == (None,)  # mode-only did not invent normal truth
+    with pytest.raises(ValueError, match="event_kind"):
+        DatasetBundle(frame, tag_alarm_settings=setting, status_events=pd.DataFrame([dict(event, event_kind="refernece")]))

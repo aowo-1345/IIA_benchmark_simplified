@@ -12,6 +12,10 @@ status_events uses half-open [start, stop) seconds; state -1/0/1 means unknown/
 normal/abnormal reference, source names its evidence and scope says process,
 group or tag (the latter two use group_id/tag_id). Operating-mode-only facts
 use state=-1 and operating_mode: a stable mode is not automatically normal.
+Optional event_kind='reference' explicitly marks a reference (including unknown)
+even when operating_mode is present; event_kind='operating_mode' is only a fact
+about mode. Without kind, a state=-1 row with a nonempty operating_mode is mode
+only; a state=-1 row without mode is an explicit unknown reference, not absence.
 """
 from dataclasses import dataclass, field
 
@@ -59,6 +63,8 @@ class DatasetBundle:
     def _validate_events(self):
         values, events = self.process_values, self.status_events
         if not events.empty:
+            if "event_kind" in events and not events.event_kind.dropna().isin(["reference", "operating_mode"]).all():
+                raise ValueError("event_kind must be reference, operating_mode or null")
             if not set(events.run_id) <= set(values.run_id) or not events.state.isin([-1, 0, 1]).all():
                 raise ValueError("events require known runs and -1/0/1 state")
             if not np.isfinite(events[["start", "stop"]]).all().all() or (events.stop <= events.start).any():

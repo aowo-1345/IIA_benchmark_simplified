@@ -1,0 +1,15 @@
+{
+  "method": "non_iid_threshold_delay_search",
+  "parameters": {
+    "thresholds": [142.5, 150.0, 157.5],
+    "delay_samples": [1, 4, 16, 64],
+    "deadbands": [0.0, 1.0, 2.0],
+    "minimum_segment_samples": 3600,
+    "pettitt_alpha": 0.05,
+    "ttest_beta": 0.05,
+    "target_normal_event_tail": 0.05,
+    "target_abnormal_gap_tail": 0.05,
+    "normal_weight": 0.5,
+    "confidence": 0.95
+  }
+}

@@ -1,5 +1,6 @@
 """Bundle facts to continuous numeric segments; no source files or learning."""
 import numpy as np
+import pandas as pd
 
 from iia_benchmark.tasks.base import Reference, SignalSegment, reject_overlap
 
@@ -38,14 +39,25 @@ def reference_for(bundle, segment, group_id=None):
         if not _event_applies(event, segment, group_id):
             continue
         mask = (segment.timestamps >= event.start) & (segment.timestamps < event.stop)
-        if event.state == -1 or not mask.any():
+        if not mask.any() or not _is_reference_event(event):
             continue
-        if np.any((labels[mask] != -1) & (labels[mask] != event.state)):
-            raise ValueError("conflicting reference intervals")
-        labels[mask] = event.state
+        if event.state != -1:
+            if np.any((labels[mask] != -1) & (labels[mask] != event.state)):
+                raise ValueError("conflicting reference intervals")
+            labels[mask] = event.state
         sources.add(event.source)
         scopes.add(event.scope)
     return Reference(labels, "; ".join(sorted(sources)), "; ".join(sorted(scopes))) if sources else None
+
+
+def _is_reference_event(event):
+    kind = getattr(event, "event_kind", None)
+    if pd.notna(kind):
+        return kind == "reference"
+    if event.state != -1:
+        return True
+    mode = getattr(event, "operating_mode", None)
+    return pd.isna(mode) or mode == ""
 
 
 
