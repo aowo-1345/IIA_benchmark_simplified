@@ -1,0 +1,10 @@
+{
+  "dataset_id": "tep",
+  "task_kind": "multivariate_detection",
+  "adapter": "tep.multivariate",
+  "adapter_config": {
+    "group_id": "tep_feed",
+    "roles": {"fit": ["d00"], "calibration": ["d00_te"], "evaluation": ["d01_te"]},
+    "alignment": {"mode": "exact_timestamp", "missing": "reject", "maximum_gap_seconds": 180}
+  }
+}

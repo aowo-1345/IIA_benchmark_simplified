@@ -29,8 +29,14 @@ class TaskAdapter:
     prepare: Callable
 
 
-BUNDLE_ADAPTERS: dict[str, Callable[[dict, SourceContext], DatasetBundle]] = {}
-TASK_ADAPTERS: dict[str, TaskAdapter] = {}
+from iia_benchmark.data.datasets.tep.bundle import load_bundle as tep_bundle
+from iia_benchmark.data.datasets.tep.task_adapters.multivariate import prepare as tep_multivariate
+from iia_benchmark.tasks.multivariate.contracts import MultivariateTaskInput
+
+BUNDLE_ADAPTERS: dict[str, Callable[[dict, SourceContext], DatasetBundle]] = {"tep.bundle": tep_bundle}
+TASK_ADAPTERS: dict[str, TaskAdapter] = {
+    "tep.multivariate": TaskAdapter("multivariate_detection", MultivariateTaskInput, tep_multivariate),
+}
 
 
 def get_bundle_adapter(name):

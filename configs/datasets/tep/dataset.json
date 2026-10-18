@@ -1,0 +1,14 @@
+{
+  "id": "tep",
+  "adapter": "tep.bundle",
+  "adapter_config": {
+    "sample_period_seconds": 180,
+    "runs": [
+      {"run_id": "d00", "path": "data/raw/tep/data/d00.dat", "source_status": "normal"},
+      {"run_id": "d00_te", "path": "data/raw/tep/data/d00_te.dat", "source_status": "normal"},
+      {"run_id": "d01_te", "path": "data/raw/tep/data/d01_te.dat", "fault_start_zero_based": 160, "label_scope": "process"}
+    ],
+    "variable_groups": [{"group_id": "tep_feed", "tag_ids": ["XMEAS_01", "XMEAS_02", "XMEAS_03", "XMEAS_04"]}]
+  },
+  "task_adapters": {"multivariate_detection": "task_adapters/multivariate_detection.json"}
+}
