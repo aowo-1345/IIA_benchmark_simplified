@@ -1,0 +1,14 @@
+{
+  "id": "power_plant",
+  "adapter": "power_plant.bundle",
+  "adapter_config": {
+    "path": "data/raw/power_plant/Data_20101.mat",
+    "variable": "A",
+    "run_id": "example3",
+    "tag_id": "X71NAO067",
+    "sample_period_seconds": 1,
+    "alarm_setting": {"direction": "high", "threshold": 150.0},
+    "invalid_below": -1000.0
+  },
+  "task_adapters": {"univariate_detection": "task_adapters/univariate_detection.json"}
+}

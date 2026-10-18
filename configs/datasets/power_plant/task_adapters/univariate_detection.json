@@ -1,0 +1,17 @@
+{
+  "dataset_id": "power_plant",
+  "task_kind": "univariate_detection",
+  "adapter": "power_plant.univariate",
+  "adapter_config": {
+    "tag_id": "X71NAO067",
+    "direction": "high",
+    "roles": {
+      "design": {"run_id": "example3", "start_index": 0, "stop_index": 484975},
+      "evaluation": {"run_id": "example3", "start_index": 484984, "stop_index": 2678400}
+    },
+    "invalid_policy": "break_continuity",
+    "minimum_segment_samples": 3600,
+    "maximum_gap_seconds": 1,
+    "baseline_replay": "declared_instant_threshold_assumption"
+  }
+}

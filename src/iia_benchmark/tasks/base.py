@@ -40,7 +40,11 @@ class SignalSegment:
 
 @dataclass(frozen=True)
 class Reference:
-    """Task-owned labels: -1 unknown, 0 normal, 1 abnormal; never Method input."""
+    """Labels: -1 unknown, 0 normal, 1 abnormal, with explicit evidence/scope.
+
+    External evaluation references stay in Task. Permitted design references may
+    enter a Method's design view; method-generated proxies are disclosed results.
+    """
 
     labels: np.ndarray
     source: str

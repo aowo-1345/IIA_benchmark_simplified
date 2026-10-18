@@ -32,10 +32,16 @@ class TaskAdapter:
 from iia_benchmark.data.datasets.tep.bundle import load_bundle as tep_bundle
 from iia_benchmark.data.datasets.tep.task_adapters.multivariate import prepare as tep_multivariate
 from iia_benchmark.tasks.multivariate.contracts import MultivariateTaskInput
+from iia_benchmark.data.datasets.power_plant.bundle import load_bundle as power_plant_bundle
+from iia_benchmark.data.datasets.power_plant.task_adapters.univariate import prepare as power_plant_univariate
+from iia_benchmark.tasks.univariate.contracts import UnivariateTaskInput
 
-BUNDLE_ADAPTERS: dict[str, Callable[[dict, SourceContext], DatasetBundle]] = {"tep.bundle": tep_bundle}
+BUNDLE_ADAPTERS: dict[str, Callable[[dict, SourceContext], DatasetBundle]] = {
+    "tep.bundle": tep_bundle, "power_plant.bundle": power_plant_bundle,
+}
 TASK_ADAPTERS: dict[str, TaskAdapter] = {
     "tep.multivariate": TaskAdapter("multivariate_detection", MultivariateTaskInput, tep_multivariate),
+    "power_plant.univariate": TaskAdapter("univariate_detection", UnivariateTaskInput, power_plant_univariate),
 }
 
 
