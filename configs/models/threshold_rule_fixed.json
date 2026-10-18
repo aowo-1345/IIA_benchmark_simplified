@@ -1,0 +1,4 @@
+{
+  "method": "threshold_rule",
+  "parameters": {"threshold": 150.0, "on_delay_seconds": 2, "off_delay_seconds": 2, "deadband": 1.0, "deadband_mode": "onset_shift"}
+}

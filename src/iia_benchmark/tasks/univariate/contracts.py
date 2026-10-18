@@ -12,6 +12,7 @@ class AlarmSetting:
     on_delay_seconds: float | None = None
     off_delay_seconds: float | None = None
     deadband: float | None = None
+    deadband_mode: str | None = None
 
 
 @dataclass(frozen=True)

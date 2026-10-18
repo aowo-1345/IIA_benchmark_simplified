@@ -24,7 +24,8 @@ def prepare(bundle, config):
     if not np.isfinite(threshold):
         raise ValueError("existing threshold must be finite")
     alarm = AlarmSetting(direction, threshold, str(setting.get("source", "existing alarm table")),
-                         optional("on_delay_seconds"), optional("off_delay_seconds"), optional("deadband"))
+                         optional("on_delay_seconds"), optional("off_delay_seconds"), optional("deadband"),
+                         None if pd.isna(setting.get("deadband_mode")) else str(setting["deadband_mode"]))
     minimum = config.get("minimum_segment_samples", 1)
     if not isinstance(minimum, int) or minimum < 1:
         raise ValueError("minimum_segment_samples must be positive integer")

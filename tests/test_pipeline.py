@@ -165,3 +165,50 @@ def test_alternative_source_and_method_use_formal_task_and_same_metrics(example,
     assert first.metrics != second.metrics
     with pytest.raises(ValueError, match="reference"):
         task.run(replace(data, references=()), ConstantMethod())
+
+
+def test_univariate_replacement_uses_runner_factory_and_serializable_report(example, monkeypatch):
+    from iia_benchmark.tasks.univariate.contracts import (
+        AlarmSetting, UnivariateDesignView, UnivariateEvaluationView, UnivariatePrediction, UnivariateTaskInput,
+    )
+    from iia_benchmark.tasks.univariate.methods.base import UnivariateMethod
+    from iia_benchmark.tasks.univariate.methods.factory import METHODS
+    class IndependentMethod(UnivariateMethod):
+        def design(self, view):
+            self.threshold = view.alarm.threshold + 2
+        def predict(self, view):
+            return UnivariatePrediction(tuple(Detection(s.run_id, s.timestamps, s.values[:, 0] >= self.threshold)
+                                               for s in view.segments), {"threshold": self.threshold})
+
+    original_load = BUNDLE_ADAPTERS["sample.csv"]
+    def load(config, context):
+        bundle = original_load(config, context)
+        bundle.tag_alarm_settings = pd.DataFrame([{"tag_id": "x", "direction": "high", "threshold": config["threshold"]}])
+        return bundle
+    def prepare(bundle, config):
+        frame = bundle.process_values
+        def segment(start, stop):
+            return SignalSegment("r", frame.timestamp.to_numpy(float)[start:stop], frame[["value"]].to_numpy(float)[start:stop],
+                                 np.arange(start, stop), ("x",))
+        alarm = AlarmSetting("high", float(bundle.tag_alarm_settings.iloc[0].threshold), "test source setting")
+        return UnivariateTaskInput(UnivariateDesignView((segment(0, 2),), alarm, (None,)),
+            UnivariateEvaluationView((segment(2, len(frame)),)), (None,), "declared_instant_threshold_assumption")
+    monkeypatch.setitem(BUNDLE_ADAPTERS, "sample.csv", load)
+    monkeypatch.setitem(TASK_ADAPTERS, "sample.convert", TaskAdapter("univariate_detection", UnivariateTaskInput, prepare))
+    monkeypatch.setitem(METHODS, "independent", IndependentMethod)
+    (example / "source.csv").write_text("timestamp,x\n0,1\n1,2\n2,4\n3,2\n4,4\n5,2\n6,4\n7,2\n")
+    dataset = json.loads((example / "dataset.json").read_text())
+    dataset["adapter_config"]["threshold"] = 3
+    dataset["task_adapters"] = {"univariate_detection": "conversion.json"}
+    (example / "dataset.json").write_text(json.dumps(dataset))
+    (example / "task.json").write_text(json.dumps({"kind": "univariate_detection", "parameters": {}}))
+    spec = json.loads((example / "conversion.json").read_text())
+    spec["task_kind"] = "univariate_detection"
+    (example / "conversion.json").write_text(json.dumps(spec))
+    (example / "model.json").write_text(json.dumps({"method": "independent", "parameters": {}}))
+    first = run_experiment(example / "experiment.json")
+    assert json.loads((first / "metrics.json").read_text())["alarm_compression_rate"]["value"] == 1.
+    assert json.loads((first / "details.json").read_text())["alarm_events"]["baseline"] == 3
+    (example / "model.json").write_text(json.dumps({"method": "threshold_rule", "parameters": {}}))
+    second = run_experiment(example / "experiment.json")
+    assert json.loads((second / "metrics.json").read_text())["alarm_compression_rate"]["value"] == 0.

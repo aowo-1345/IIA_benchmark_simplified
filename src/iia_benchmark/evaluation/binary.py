@@ -1,5 +1,6 @@
 """Pointwise binary definitions shared only when task semantics agree."""
 import numpy as np
+from iia_benchmark.evaluation.events import detection_delays
 
 
 def confusion(labels, states):
@@ -25,3 +26,25 @@ def point_metrics(counts):
         "FAR": metric(fp/(fp+tn) if fp+tn else None, "FP/(FP+TN), normal sample fraction", "no known normal samples"),
         "MAR": metric(fn/(tp+fn) if tp+fn else None, "FN/(TP+FN), abnormal sample fraction", "no known abnormal samples"),
     }
+
+
+def evaluate_sequences(sequences):
+    """Aggregate equal-definition point/delay metrics, keeping segment boundaries.
+
+    sequences yields (timestamps_seconds, reference_labels, boolean_states).
+    Reference selection/evidence and task-specific report fields stay in Tasks.
+    """
+    counts = {key: 0 for key in ("tp", "fn", "fp", "tn", "unknown")}
+    delays, missed, censored = [], 0, 0
+    for timestamps, labels, states in sequences:
+        for key, value in confusion(labels, states).items():
+            counts[key] += value
+        observed, lost, left = detection_delays(timestamps, labels, states)
+        delays.extend(observed)
+        missed += lost
+        censored += left
+    metrics = point_metrics(counts)
+    metrics["ADD"] = metric(float(np.mean(delays)) if delays else None,
+        "mean first-alarm delay in seconds among detected 0-to-1 events; missed and left-censored events reported separately",
+        "no detected event with observed onset")
+    return metrics, {"counts": counts, "delay_events": {"detected": len(delays), "missed": missed, "left_censored": censored}}
