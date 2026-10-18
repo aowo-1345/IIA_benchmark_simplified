@@ -1,6 +1,6 @@
 # IIA Benchmark Simplified：公共框架与任务接口设计草案
 
-状态：讨论草案，2026-10-18。本文件描述目标结构；目录树中的新文件尚未实现。
+状态：实现对照版，2026-10-18。T1—T6 已实现并通过对应审查；接口精确字段以所链 contracts.py 为准，运行与扩展命令见 README。
 
 本文说明公共数据格式、模块接口与依赖边界。
 
@@ -109,7 +109,8 @@ src/iia_benchmark/
 │   │   └── methods/
 │   │       ├── base.py           # UnivariateMethod 抽象接口
 │   │       ├── factory.py        # model.method → 本任务的方法实现
-│   │       └── threshold_rule.py # 阈值 + 延时 + 死区的完整规则及搜索
+│   │       ├── threshold_rule.py # 阈值 + 延时 + 死区的完整固定规则
+│   │       └── non_iid_search.py # 方法内统计参考与有界搜索，复用规则预测
 │   └── multivariate/
 │       ├── contracts.py          # 组输入、标准预测、固定结果类型
 │       ├── task.py               # 校验任务输入、调用方法、评价预测
@@ -124,7 +125,7 @@ src/iia_benchmark/
 └── results/writer.py             # 保存配置、预测、指标与来源记录
 ```
 
-`threshold_rule.py` 是一个完整方法。阈值、延时、死区是它的可组合参数，不分别作为三种异常检测方法。每个 Method 实现所属 Task 的抽象接口；工厂按 `model.method` 构造实现，Method 本身不实现工厂方法。以后接入另一种完整算法，在所属 Task 的 `methods/` 中实现接口、加入工厂并提供 model 配置，不改 Dataset Adapter 或该 Task 的指标定义。
+`threshold_rule.py` 是完整固定规则方法；`non_iid_search.py` 是在同一任务协议下内部构造统计参考并设计的完整方法，复用前者的规则计算函数。阈值、延时、死区是它的可组合参数，不分别作为三种异常检测方法。每个 Method 实现所属 Task 的抽象接口；工厂按 `model.method` 构造实现，Method 本身不实现工厂方法。以后接入另一种完整算法，在所属 Task 的 `methods/` 中实现接口、加入工厂并提供 model 配置，不改 Dataset Adapter 或该 Task 的指标定义。
 
 每个 `datasets/<id>/dataset.json` 用 `adapter` 和 `adapter_config` 说明原始文件、字段、时间、质量、已有报警设置及来源标签如何变成完整四表；`task_adapters` 只登记本数据集支持的 Task 类型及其转换配置路径。转换配置位于同一数据集目录下，规定该 Task 的目标、设计/拟合/校准/评价时段和数据整理规则。配置中的原始数据路径相对项目根目录，`task_adapters` 中的配置路径相对 `dataset.json`。`data.registry` 把配置里的 Adapter ID 映射到显式实现，Runner 不直接拼 Python 模块名。Runner 通过实验引用的 dataset 与 task kind 查找并校验这一登记项，将解析后的转换配置一并写入结果快照；没有登记就明确报不支持。只为实际支持的数据集—Task 组合登记转换；相同处理可复用 `data/common/`，无须按所有数据集与任务的笛卡尔积写代码。首版每个组合只登记一份转换配置，不增设独立的 `configs/splits/` 或顶层 `configs/task_adapters/`。
 
@@ -150,13 +151,16 @@ DatasetBundle(
 
 设计/拟合、校准、评价的用途划分留在 `datasets/<id>/task_adapters/<task>.json`；数据集的 Task Adapter 按 Bundle 中的 run ID、时间或采样序号验证边界，输出该 Task 的标准输入。来源文件、校验值、四表转换版本及 Task Adapter 配置写入运行结果的 `manifest.json`，都不是 DatasetBundle 的第五个字段。
 
-这些是四类逻辑数据，不要求公开数据真的存在四个 CSV 文件；TEP、PRONTO、SKAB 和火电压差的 Adapter 只填来源实际具备的表/行。Adapter 做字段、时间及质量语义转换，不为凑齐指标生成异常标签。每张表的行可以由类定义语义，但大时序的内存表示不必强制为每点一个 Python 对象。火电文件已复制至 `data/raw/power_plant/Data_20101.mat`；TEP、PRONTO、SKAB 也已在 `data/raw/` 整理，尚未实现对应的新 Adapter。
+这些是四类逻辑数据，不要求公开数据真的存在四个 CSV 文件；TEP、PRONTO、SKAB 和火电压差的 Adapter 只填来源实际具备的表/行。Adapter 做字段、时间及质量语义转换，不为凑齐指标生成异常标签。每张表的行可以由类定义语义，但大时序的内存表示不必强制为每点一个 Python 对象。火电文件已复制至 `data/raw/power_plant/Data_20101.mat`；TEP、PRONTO、SKAB 也已在 `data/raw/` 整理；TEP与火电两层Adapter已实现，PRONTO/SKAB仅准备了数据。
 
 火电压差 Example 3 是单个 Tag `X71NAO067` 的时序，已有高报警阈值为 150 Pa、采样周期 1 秒；原论文示例只验证固定阈值下的 Delay 设计。阈值×Delay 联合搜索使用 Pettitt+t 检验建立正常/异常统计代理，**不是**原始数据自带的异常真值，也不是论文原设定复现。该数据可以根据统计归类的数据段计算 FAR/MAR 等有相应依据的指标，报告必须保留统计依据；不因缺少现场事故标签而一概跳过评价，也不把统计归类称作现场确认事故。F1/ADD 是否可计算由任务口径及可用材料决定。TEP、PRONTO、SKAB 的过程级标签不能直接当成单测点异常真值，本轮只实现 TEP 联合检测，后两者留待扩展。
 
+
+来源明确标为未知的参考必须保留，不能在转换时丢为无参考。`status_events` 的可选 `event_kind` 只取 reference/operating_mode：前者可携带 -1未知，后者仅表达工况。缺省kind时，state=-1且有operating_mode视为工况事实，无mode则是显式未知参考。Task 对外部参考对象整段优先，不用Method统计代理填补其中未知点。
+
 ### 数据集到 Task 的标准输入
 
-每个 Task 在自己的 `contracts.py` 中定义输入类型；每个数据集在 `task_adapters/` 中实现已登记的转换。两类输入都保留 `run_id`、时间、源行对应关系和连续段边界，使预测能够回写、报警状态不会跨无效点或 run 延续。数据集的 Task Adapter 只接收四表 Bundle 与本组合的转换配置；来源文件已由 `bundle.py` 读取，它不再读取 MAT、CSV 等原始文件，也不拟合模型或计算最终指标。
+每个 Task 在自己的 `contracts.py` 中定义输入类型；每个数据集在 `task_adapters/` 中实现已登记的转换。两类输入都保留 `run_id`、时间、源行对应关系和连续段边界，使预测能够回写、报警状态不会跨无效点或 run 延续。 `source_indices` 指选中Tag／变量组在用途划分前、未删除无效点的时间轴采样位置；TEP/MAT即原始样本序号。异步来源以目标测点并集对齐，无关Tag不能改变缺测或连续性判断；run、时间和列名共同对应四表来源事实。数据集的 Task Adapter 只接收四表 Bundle 与本组合的转换配置；来源文件已由 `bundle.py` 读取，它不再读取 MAT、CSV 等原始文件，也不拟合模型或计算最终指标。
 
 | Task 输入 | 必需内容 | 允许缺失并明确记录 |
 |---|---|---|
@@ -228,7 +232,7 @@ class MultivariateMethod(ABC):
     def predict(self, data: MultivariateEvaluationView) -> MultivariatePrediction: ...
 ```
 
-`UnivariatePrediction` 必有 `run_id、timestamps[N]、alarm_state[N]、selected_parameters`；`MultivariatePrediction` 必有 `run_id、timestamps[N]、abnormal_state[N]`，可带 `score[N]` 和判定界限。每个标准预测都要验证长度、时间顺序及 run 对应关系；分数不是所有方法的必需输出。Method 可以提供参数和诊断信息，但不输出自己定义的最终 F1/FAR 等报告指标。Task 对所有同类方法提供相同的**任务数据语义**，特定方法需要的标准化、统计量或内部特征由该方法完成。评价标签由 Task 留到评测阶段，不随评价输入送给方法。单变量的当前规则可以由同一 `threshold_rule` 方法以固定参数回放，候选规则只在设计段搜索。
+两类 Prediction 都包含按输入连续段排列的 `detections`；每个 `Detection` 必有 `run_id、timestamps[N]、state[N]`，可带 `score[N]`。单变量另有 `selected_parameters` 与可选公开统计参考；联合检测另有 `parameters`。判定界限属于参数信息。每个标准预测都要验证长度、时间顺序及 run 对应关系；分数不是所有方法的必需输出。Method 可以提供参数和诊断信息，但不输出自己定义的最终 F1/FAR 等报告指标。Task 对所有同类方法提供相同的**任务数据语义**，特定方法需要的标准化、统计量或内部特征由该方法完成。评价标签由 Task 留到评测阶段，不随评价输入送给方法。单变量的当前规则可以由同一 `threshold_rule` 方法以固定参数回放，候选规则只在设计段搜索。
 
 ### 指标的共用边界
 
@@ -240,7 +244,7 @@ class MultivariateMethod(ABC):
 
 ## 实验配置如何启动这条链路
 
-实验配置只写实验名，以及对 `datasets / tasks / models` 三类配置的引用；它自己构成第四类。Runner 从 dataset 的 `task_adapters[task.kind]` 解析该数据集到该 Task 的转换配置，路径相对 `dataset.json` 所在目录，不靠文件名猜测，也不要求实验配置重复写第四个引用。Task 配置只写该任务通用的处理/评价参数，Model 配置写算法与搜索参数；数据集—Task 组合特有的目标、时段用途和整理规则写在组合转换配置。下面是**目标格式示意，不是当前 Runner 已支持的配置**。示例来源路径使用本仓库已整理的数据；新 Runner 与配置加载尚未实现。
+实验配置只写实验名，以及对 `datasets / tasks / models` 三类配置的引用；它自己构成第四类。Runner 从 dataset 的 `task_adapters[task.kind]` 解析该数据集到该 Task 的转换配置，路径相对 `dataset.json` 所在目录，不靠文件名猜测，也不要求实验配置重复写第四个引用。Task 配置只写该任务通用的处理/评价参数，Model 配置写算法与搜索参数；数据集—Task 组合特有的目标、时段用途和整理规则写在组合转换配置。下面的 JSON 与已实现配置一致。Loader 检查引用和身份，Runner 在读来源前通过 Task/Method 工厂及 Adapter 登记校验实现兼容性。
 
 `configs/experiments/power_plant_pressure_univariate.json`：
 
@@ -268,9 +272,7 @@ class MultivariateMethod(ABC):
     "alarm_setting": {"direction": "high", "threshold": 150.0},
     "invalid_below": -1000.0
   },
-  "task_adapters": {
-    "univariate_detection": "task_adapters/univariate_detection.json"
-  }
+  "task_adapters": {"univariate_detection": "task_adapters/univariate_detection.json"}
 }
 ```
 
@@ -290,6 +292,7 @@ class MultivariateMethod(ABC):
     },
     "invalid_policy": "break_continuity",
     "minimum_segment_samples": 3600,
+    "maximum_gap_seconds": 1,
     "baseline_replay": "declared_instant_threshold_assumption"
   }
 }
@@ -300,12 +303,7 @@ Runner 应校验转换配置的 `dataset_id` 和 `task_kind` 与实验所选配�
 `configs/tasks/univariate_detection.json`：
 
 ```json
-{
-  "kind": "univariate_detection",
-  "parameters": {
-    "event_merge_gap_samples": 0
-  }
-}
+{"kind": "univariate_detection", "parameters": {"event_merge_gap_samples": 0}}
 ```
 
 `configs/models/non_iid_threshold_delay_search.json`：
@@ -314,19 +312,21 @@ Runner 应校验转换配置的 `dataset_id` 和 `task_kind` 与实验所选配�
 {
   "method": "non_iid_threshold_delay_search",
   "parameters": {
-    "reference_policy": "pettitt_ttest_proxy",
+    "thresholds": [142.5, 150.0, 157.5],
+    "delay_samples": [1, 4, 16, 64],
+    "deadbands": [0.0, 1.0, 2.0],
+    "minimum_segment_samples": 3600,
     "pettitt_alpha": 0.05,
     "ttest_beta": 0.05,
-    "threshold_relative_range": 0.05,
-    "threshold_step": 0.5,
-    "maximum_delay": 512,
-    "target_far": 0.05,
-    "target_mar": 0.05
+    "target_normal_event_tail": 0.05,
+    "target_abnormal_gap_tail": 0.05,
+    "normal_weight": 0.5,
+    "confidence": 0.95
   }
 }
 ```
 
-这份 model JSON 仍是结构示意，尚未写全比较符号（`>` 或 `>=`）、启动／解除延时、死区候选及状态转移、搜索目标的精确定义；旧单变量实现对这些细节并不一致，实施时需核对并通过行为样例固定。Pettitt/t 检验参数属于该模型配置，不进入 Task 的共同前提；有原始文件不代表新链路已可执行。
+规则已固定：高报警触发用包含等值的比较，恢复用严格比较，低报警镜像；死区位置通过 onset_shift/recovery_shift 明示，延时以秒从首个连续合格观测开始，断段重置。统计搜索以有界样本延时候选换算秒数，方法内完成 Pettitt/t 检验及游程尾部目标；它不保证 Task 的逐点指标达到目标。完整模型示例的高 FAR 限制见 README，不作为优化成功。
 
 TEP 的实验也只引用三份配置，Dataset Adapter 保留 52 个原始变量并把预声明的四测点组写入 `variable_groups`。以下两个 JSON 与紧随其后的组合转换配置配套；d01_te 从第 160 个采样点起的来源故障标签由 TEP 的 `bundle.py` 转成四表事件，不写在转换配置中当成划分规则。
 
@@ -354,13 +354,9 @@ TEP 的实验也只引用三份配置，Dataset Adapter 保留 52 个原始变�
       {"run_id": "d00_te", "path": "data/raw/tep/data/d00_te.dat", "source_status": "normal"},
       {"run_id": "d01_te", "path": "data/raw/tep/data/d01_te.dat", "fault_start_zero_based": 160, "label_scope": "process"}
     ],
-    "variable_groups": [
-      {"group_id": "tep_feed", "tag_ids": ["XMEAS_01", "XMEAS_02", "XMEAS_03", "XMEAS_04"]}
-    ]
+    "variable_groups": [{"group_id": "tep_feed", "tag_ids": ["XMEAS_01", "XMEAS_02", "XMEAS_03", "XMEAS_04"]}]
   },
-  "task_adapters": {
-    "multivariate_detection": "task_adapters/multivariate_detection.json"
-  }
+  "task_adapters": {"multivariate_detection": "task_adapters/multivariate_detection.json"}
 }
 ```
 
@@ -373,17 +369,13 @@ TEP 的实验也只引用三份配置，Dataset Adapter 保留 52 个原始变�
   "adapter": "tep.multivariate",
   "adapter_config": {
     "group_id": "tep_feed",
-    "roles": {
-      "fit": ["d00"],
-      "calibration": ["d00_te"],
-      "evaluation": ["d01_te"]
-    },
-    "alignment": {"mode": "exact_timestamp", "missing": "reject"}
+    "roles": {"fit": ["d00"], "calibration": ["d00_te"], "evaluation": ["d01_te"]},
+    "alignment": {"mode": "exact_timestamp", "missing": "reject", "maximum_gap_seconds": 180}
   }
 }
 ```
 
-以 TEP 的四测点马氏距离实验为例，**新 Runner 的目标调用顺序**是：
+以 TEP 的四测点马氏距离实验为例，**Runner 的实际调用顺序**是：
 
 | 步骤 | 输入 | 输出与下一步 |
 |---|---|---|
@@ -419,13 +411,13 @@ experiments/runs/2026-10-18/power_plant_pressure_univariate/
 
 ## 现有素材与迁移边界
 
-新仓库目前只有文档、原始数据副本及校验脚本。旧工作树的来源读取、报警规则、统计设计和马氏距离实现可只读核对、选择性迁移；旧配置、旧 Task 与调用关系不作为新接口的默认实现。迁移后必须能只依赖本仓库运行，保留文献与数据来源，并经所属任务的标准输入输出验证。
+新仓库已独立实现两条链路；旧工作树的来源读取、报警规则、统计设计曾作为只读数值参考，旧配置、旧 Task 与调用关系不作为新接口的默认实现。迁移后必须能只依赖本仓库运行，保留文献与数据来源，并经所属任务的标准输入输出验证。
 
-火电 MAT 和 TEP DAT 的新路径已在上文示例给出；实际来源与校验值见 `data/manifest.json`。第一轮实现单变量 `threshold_rule` 与联合检测 `mahalanobis`，PRONTO、SKAB 暂只准备数据，不声称已实现 Adapter 或实验。
+火电 MAT 和 TEP DAT 的新路径已在上文示例给出；实际来源与校验值见 `data/manifest.json`。第一轮实现单变量 `threshold_rule`／`non_iid_threshold_delay_search` 与联合检测 `mahalanobis`，PRONTO、SKAB 暂只准备数据，不声称已实现 Adapter 或实验。
 
 ## 实施时落实的行为协议
 
-文件树与 JSON 是待实现约定。TEP 需在所属数据转换与任务中落实时间对齐、缺失规则、事件边界和未检出 ADD 的处理；火电需在具体 Method 中落实比较符号、延时／死区状态、统计处理与搜索目标，并由 Task 固定最终评分口径。四表保留来源时间语义及采样依据，不把相对采样时间伪写成绝对现场时间。
+文件树与 JSON 对应当前实现。TEP 需在所属数据转换与任务中落实时间对齐、缺失规则、事件边界和未检出 ADD 的处理；火电需在具体 Method 中落实比较符号、延时／死区状态、统计处理与搜索目标，并由 Task 固定最终评分口径。四表保留来源时间语义及采样依据，不把相对采样时间伪写成绝对现场时间。
 
 方法生成且统一评价确实需要的统计分段等信息，须通过该 Task 的标准结果协议表达，字段语义明确；它不是新增评分层，也不要求其他方法执行相同算法。精确字段在对应任务落地时核对，不允许 Task 读取某个 Method 的私有实现来完成评分。
 
