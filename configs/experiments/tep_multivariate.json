@@ -1,0 +1,6 @@
+{
+  "name": "tep_multivariate",
+  "dataset": "configs/datasets/tep/dataset.json",
+  "task": "configs/tasks/multivariate_detection.json",
+  "model": "configs/models/mahalanobis.json"
+}

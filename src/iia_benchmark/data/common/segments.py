@@ -1,21 +1,14 @@
 """Bundle facts to continuous numeric segments; no source files or learning."""
 import numpy as np
 
-from iia_benchmark.tasks.base import Reference, SignalSegment
+from iia_benchmark.tasks.base import Reference, SignalSegment, reject_overlap
 
 
 def select_segments(bundle, tags, run_id, *, start=0, stop=None, missing="reject", maximum_gap_seconds=None):
-    frame = bundle.process_values
-    run = frame[frame.run_id == run_id]
-    if run.empty or not set(tags) <= set(run.tag_id):
-        raise ValueError(f"unknown run/tags: {run_id}, {tags}")
-    timeline = np.sort(run.timestamp.unique())
+    matrix, quality, timeline = _aligned_run(bundle, tags, run_id)
     stop = len(timeline) if stop is None else stop
     if not isinstance(start, int) or not isinstance(stop, int) or not 0 <= start < stop <= len(timeline):
         raise ValueError("invalid half-open sample-index selection")
-    selected = run[run.tag_id.isin(tags)]
-    matrix = selected.pivot(index="timestamp", columns="tag_id", values="value").reindex(index=timeline, columns=tags)
-    quality = selected.pivot(index="timestamp", columns="tag_id", values="quality_flag").reindex(index=timeline, columns=tags)
     values = matrix.to_numpy(float)[start:stop]
     times = timeline[start:stop].astype(float)
     valid = quality.eq(True).to_numpy(bool)[start:stop].all(axis=1) & np.isfinite(values).all(axis=1)
@@ -42,11 +35,7 @@ def reference_for(bundle, segment, group_id=None):
     if events.empty:
         return None
     for event in events[events.run_id == segment.run_id].itertuples():
-        if event.scope == "group" and getattr(event, "group_id", None) != group_id:
-            continue
-        if event.scope == "tag" and (len(segment.feature_names) != 1 or getattr(event, "tag_id", None) != segment.feature_names[0]):
-            continue
-        if event.scope not in {"process", "group", "tag"}:
+        if not _event_applies(event, segment, group_id):
             continue
         mask = (segment.timestamps >= event.start) & (segment.timestamps < event.stop)
         if event.state == -1 or not mask.any():
@@ -59,12 +48,23 @@ def reference_for(bundle, segment, group_id=None):
     return Reference(labels, "; ".join(sorted(sources)), "; ".join(sorted(scopes))) if sources else None
 
 
-def reject_overlap(roles):
-    used = {}
-    for segments in roles:
-        for segment in segments:
-            start, stop = int(segment.source_indices[0]), int(segment.source_indices[-1]) + 1
-            intervals = used.setdefault(segment.run_id, [])
-            if any(start < b and a < stop for a, b in intervals):
-                raise ValueError("roles/segments overlap in original run samples")
-            intervals.append((start, stop))
+
+def _aligned_run(bundle, tags, run_id):
+    run = bundle.process_values.loc[bundle.process_values.run_id == run_id]
+    if run.empty or not set(tags) <= set(run.tag_id):
+        raise ValueError(f"unknown run/tags: {run_id}, {tags}")
+    timeline = np.sort(run.timestamp.unique())
+    selected = run[run.tag_id.isin(tags)]
+    matrix = selected.pivot(index="timestamp", columns="tag_id", values="value").reindex(index=timeline, columns=tags)
+    quality = selected.pivot(index="timestamp", columns="tag_id", values="quality_flag").reindex(index=timeline, columns=tags)
+    return matrix, quality, timeline
+
+
+def _event_applies(event, segment, group_id):
+    if event.scope == "process":
+        return True
+    if event.scope == "group":
+        return getattr(event, "group_id", None) == group_id
+    if event.scope == "tag":
+        return len(segment.feature_names) == 1 and getattr(event, "tag_id", None) == segment.feature_names[0]
+    return False

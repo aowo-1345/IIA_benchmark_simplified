@@ -15,9 +15,13 @@ def load_bundle(config, context):
     period = float(config["sample_period_seconds"])
     if not np.isfinite(period) or period <= 0:
         raise ValueError("sample period must be finite positive seconds")
-    frames, events = [], []
+    frames, events, paths = [], [], set()
     for run in config["runs"]:
-        matrix = np.loadtxt(context.file(run["path"]))
+        path = context.file(run["path"])
+        if path in paths:
+            raise ValueError("same source file cannot be aliased as independent runs")
+        paths.add(path)
+        matrix = np.loadtxt(path)
         if matrix.ndim != 2 or matrix.shape == (52, 52):
             raise ValueError("TEP requires an unambiguous sample/52-variable matrix")
         if matrix.shape[1] != 52:

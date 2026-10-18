@@ -2,6 +2,8 @@
 import argparse
 from pathlib import Path
 import subprocess
+import sys
+from importlib.metadata import version
 
 from iia_benchmark.config.loader import load_experiment
 from iia_benchmark.data.contracts import DatasetBundle
@@ -26,6 +28,9 @@ def run_experiment(path, output_root=None) -> Path:
     revision = subprocess.run(["git", "rev-parse", "HEAD"], cwd=plan.root, capture_output=True, text=True)
     manifest = {"started": started, "output": str(directory), "config_paths": plan.config_paths,
                 "git_commit": revision.stdout.strip() if revision.returncode == 0 else None,
+                "git_dirty": bool(subprocess.run(["git", "status", "--porcelain"], cwd=plan.root,
+                                                capture_output=True, text=True).stdout.strip()),
+                "versions": {"python": sys.version.split()[0], **{name: version(name) for name in ("numpy", "pandas", "scipy")}},
                 "status": "running", "sources": sources.sources}
     write_json(directory / "config.snapshot.json", configs)
     try:

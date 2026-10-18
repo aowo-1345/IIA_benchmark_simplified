@@ -1,0 +1,1 @@
+{"method": "mahalanobis", "parameters": {"quantile": 0.99, "ridge": 0.000001}}

@@ -31,6 +31,11 @@ def test_tep_orientation_selection_labels_and_no_file_reread(tmp_path):
         {"run_id": "n", "path": "normal.dat", "source_status": "normal"},
         {"run_id": "e", "path": "eval.dat", "fault_start_zero_based": 2}],
         "variable_groups": [{"group_id": "g", "tag_ids": ["XMEAS_04", "XMEAS_01"]}]}
+    from copy import deepcopy
+    aliased = deepcopy(source)
+    aliased['runs'][1]['path'] = 'normal.dat'
+    with pytest.raises(ValueError, match="aliased"):
+        load_bundle(aliased, SourceContext(tmp_path))
     bundle = load_bundle(source, SourceContext(tmp_path))
     assert len(bundle.process_values) == 12*52
     assert bundle.tag_alarm_settings.empty

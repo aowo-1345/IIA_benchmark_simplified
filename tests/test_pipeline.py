@@ -7,7 +7,7 @@ import pytest
 
 from iia_benchmark.config.loader import load_experiment
 from iia_benchmark.data.contracts import DatasetBundle
-from iia_benchmark.data.registry import BUNDLE_ADAPTERS, TASK_ADAPTERS, TaskAdapter
+from iia_benchmark.data.registry import BUNDLE_ADAPTERS, TASK_ADAPTERS, SourceContext, TaskAdapter
 from iia_benchmark.runner import run_experiment
 from iia_benchmark.tasks.base import BaseTask, Detection, Reference, SignalSegment, TaskResult
 from iia_benchmark.tasks.factory import TASKS
@@ -133,3 +133,35 @@ def test_prediction_cannot_change_alignment_or_emit_nan():
         Detection("other", segment.timestamps, np.zeros(2, bool)).validate_against(segment)
     with pytest.raises(ValueError, match="scores"):
         Detection("r", segment.timestamps, np.zeros(2, bool), np.array([0., np.nan])).validate_against(segment)
+
+
+def test_alternative_source_and_method_use_formal_task_and_same_metrics(example, monkeypatch):
+    from iia_benchmark.tasks.multivariate.methods.factory import METHODS
+    from iia_benchmark.tasks.multivariate.task import MultivariateTask
+    conversion = TASK_ADAPTERS["sample.convert"]
+    monkeypatch.setitem(TASK_ADAPTERS, "sample.convert", TaskAdapter("multivariate_detection", conversion.input_type, conversion.prepare))
+    monkeypatch.setitem(METHODS, "constant", ConstantMethod)
+    (example / "task.json").write_text(json.dumps({"kind": "multivariate_detection", "parameters": {}}))
+    dataset = json.loads((example / "dataset.json").read_text())
+    dataset["task_adapters"] = {"multivariate_detection": "conversion.json"}
+    (example / "dataset.json").write_text(json.dumps(dataset))
+    spec = json.loads((example / "conversion.json").read_text())
+    spec["task_kind"] = "multivariate_detection"
+    (example / "conversion.json").write_text(json.dumps(spec))
+    output = run_experiment(example / "experiment.json")
+    metrics = json.loads((output / "metrics.json").read_text())
+    assert set(metrics) == {"F1", "FAR", "MAR", "ADD"}
+    assert metrics["F1"]["value"] == 0
+    assert metrics["MAR"]["value"] == 1
+    assert metrics["FAR"]["status"] == "unavailable"
+    bundle = BUNDLE_ADAPTERS["sample.csv"]({"path": "source.csv"}, SourceContext(example))
+    data = conversion.prepare(bundle, {})
+    from dataclasses import replace
+    task = MultivariateTask({})
+    first = task.run(data, ConstantMethod())
+    changed = replace(data, references=(Reference(np.array([0, 0]), "changed", "process"),))
+    second = task.run(changed, ConstantMethod())
+    pd.testing.assert_series_equal(first.predictions.state, second.predictions.state)
+    assert first.metrics != second.metrics
+    with pytest.raises(ValueError, match="reference"):
+        task.run(replace(data, references=()), ConstantMethod())

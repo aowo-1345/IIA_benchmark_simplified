@@ -39,6 +39,14 @@ class DatasetBundle:
                 raise TypeError(f"{name} must be a DataFrame")
             if (name == "process_values" or not table.empty) and not columns <= set(table):
                 raise ValueError(f"{name} requires columns {sorted(columns)}")
+        self._validate_process_values()
+        tags = set(self.process_values.tag_id)
+        for table in (self.tag_alarm_settings, self.variable_groups):
+            if not table.empty and not set(table.tag_id) <= tags:
+                raise ValueError("optional table refers to unknown tag_id")
+        self._validate_events()
+
+    def _validate_process_values(self):
         values = self.process_values
         keys = ["run_id", "timestamp", "tag_id"]
         if values[keys].isna().any().any() or values.duplicated(keys).any():
@@ -47,11 +55,9 @@ class DatasetBundle:
             raise ValueError("timestamps must be finite seconds and quality_flag boolean (True=valid)")
         if not np.isfinite(values.loc[values.quality_flag.astype(bool), "value"]).all():
             raise ValueError("nonfinite values must be marked invalid")
-        tags = set(values.tag_id)
-        for table in (self.tag_alarm_settings, self.variable_groups):
-            if not table.empty and not set(table.tag_id) <= tags:
-                raise ValueError("optional table refers to unknown tag_id")
-        events = self.status_events
+
+    def _validate_events(self):
+        values, events = self.process_values, self.status_events
         if not events.empty:
             if not set(events.run_id) <= set(values.run_id) or not events.state.isin([-1, 0, 1]).all():
                 raise ValueError("events require known runs and -1/0/1 state")

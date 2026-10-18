@@ -89,3 +89,13 @@ class BaseTask(ABC):
     @abstractmethod
     def run(self, data, method) -> TaskResult:
         """Validate task data, call its Method protocol, then score standard results."""
+
+def reject_overlap(roles):
+    used = {}
+    for segments in roles:
+        for segment in segments:
+            start, stop = int(segment.source_indices[0]), int(segment.source_indices[-1]) + 1
+            intervals = used.setdefault(segment.run_id, [])
+            if any(start < b and a < stop for a, b in intervals):
+                raise ValueError("roles/segments overlap in original run samples")
+            intervals.append((start, stop))
