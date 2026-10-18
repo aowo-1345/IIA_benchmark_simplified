@@ -1,0 +1,615 @@
+{
+  "schema_version": 1,
+  "description": "本地原始数据副本清单；不定义任务划分、算法参数或指标。",
+  "datasets": [
+    {
+      "id": "tep",
+      "url": "https://github.com/jkitchin/tennessee-eastman-profbraatz",
+      "revision": "9a6c8e5fcef4a2850778704e7793c87b0a187005",
+      "scope": "data/ 下全部 DAT 与原说明；不含模拟器代码或上游 Git 历史",
+      "license_note": "保留上游 LICENSE 原文",
+      "intended_task": "multivariate_detection",
+      "files": [
+        {
+          "path": "data/raw/tep/data/README.md",
+          "source_path": "data/README.md",
+          "bytes": 3115,
+          "sha256": "d148c027f974223d4da43924153ea706962da7c56297b6cf423854e45761c1eb"
+        },
+        {
+          "path": "data/raw/tep/data/d00.dat",
+          "source_path": "data/d00.dat",
+          "bytes": 416049,
+          "sha256": "4c3c0b11eefacf93e5d2529e2866d7a625e37aa9153d0f95fae17a6c9e560deb"
+        },
+        {
+          "path": "data/raw/tep/data/d00_te.dat",
+          "source_path": "data/d00_te.dat",
+          "bytes": 799680,
+          "sha256": "57d56da4199e3d73582855d810be1d13d931386fd728bf1694798c7b0a03678c"
+        },
+        {
+          "path": "data/raw/tep/data/d01.dat",
+          "source_path": "data/d01.dat",
+          "bytes": 399840,
+          "sha256": "b0da22ac7561d82b0ba0b48bf87d2b3a8655cb23a3dc37330dd03cdd126c387c"
+        },
+        {
+          "path": "data/raw/tep/data/d01_te.dat",
+          "source_path": "data/d01_te.dat",
+          "bytes": 799680,
+          "sha256": "e7e6992fb39664e739fccbc001a1c5d5f7cb21829544f734ca3f282c26f680e5"
+        },
+        {
+          "path": "data/raw/tep/data/d02.dat",
+          "source_path": "data/d02.dat",
+          "bytes": 399840,
+          "sha256": "af1a46ba3a5482be3e7b143606f22ae509138544af2a2d0eb7389459257f8179"
+        },
+        {
+          "path": "data/raw/tep/data/d02_te.dat",
+          "source_path": "data/d02_te.dat",
+          "bytes": 799680,
+          "sha256": "a34bd9c3693fa96bd3ee533fb7fbe29a9d226a4e3250b585ef1308e1136dbfb0"
+        },
+        {
+          "path": "data/raw/tep/data/d03.dat",
+          "source_path": "data/d03.dat",
+          "bytes": 399840,
+          "sha256": "df39c57bdac7ea476ee236c289e0f59b0cbf868adfbbbaf213f692d8cd96e52a"
+        },
+        {
+          "path": "data/raw/tep/data/d03_te.dat",
+          "source_path": "data/d03_te.dat",
+          "bytes": 799680,
+          "sha256": "b7bf6f2ed7cff0a5577898b009edd252b9bdf6ee9ff7dbeacf9af9aa4c6abace"
+        },
+        {
+          "path": "data/raw/tep/data/d04.dat",
+          "source_path": "data/d04.dat",
+          "bytes": 399840,
+          "sha256": "346702fce33d9707f0b4ec5b8f533ccb08be60313607d5156d7e237b80a87b3f"
+        },
+        {
+          "path": "data/raw/tep/data/d04_te.dat",
+          "source_path": "data/d04_te.dat",
+          "bytes": 799680,
+          "sha256": "1ccb488dd5feac11aad54623451168abef066229e685872597897800363916f9"
+        },
+        {
+          "path": "data/raw/tep/data/d05.dat",
+          "source_path": "data/d05.dat",
+          "bytes": 399840,
+          "sha256": "3a47bfce4010ce0c634ae828409cce657ecd03bf0c4d59f8dd4a3d4f792f493f"
+        },
+        {
+          "path": "data/raw/tep/data/d05_te.dat",
+          "source_path": "data/d05_te.dat",
+          "bytes": 799680,
+          "sha256": "1def7258a2865aeead699d52c8cf926fbf34c1467aaf298121987ab858fd0888"
+        },
+        {
+          "path": "data/raw/tep/data/d06.dat",
+          "source_path": "data/d06.dat",
+          "bytes": 399840,
+          "sha256": "ff0882a44bb74f5d2d1a864425ac7e5ae82420391c7060232cefc08ad5bf7331"
+        },
+        {
+          "path": "data/raw/tep/data/d06_te.dat",
+          "source_path": "data/d06_te.dat",
+          "bytes": 799680,
+          "sha256": "8a3adc7121eaa9b9300c27f9c57a8ab356315401cb964310a4a8244dd34bf79d"
+        },
+        {
+          "path": "data/raw/tep/data/d07.dat",
+          "source_path": "data/d07.dat",
+          "bytes": 399840,
+          "sha256": "e3fd272ed53f899ab0c8278c7eede55418b01a2339b5fcff14a87fefaa3d181d"
+        },
+        {
+          "path": "data/raw/tep/data/d07_te.dat",
+          "source_path": "data/d07_te.dat",
+          "bytes": 799680,
+          "sha256": "e01b7c81daf9fccc4495cbde5658296918276b3c078044893f6e945dd91d3446"
+        },
+        {
+          "path": "data/raw/tep/data/d08.dat",
+          "source_path": "data/d08.dat",
+          "bytes": 399840,
+          "sha256": "4817735e339449bec909d1cbe77e421acc79c7357b8c6b5bb82c6e5788b72449"
+        },
+        {
+          "path": "data/raw/tep/data/d08_te.dat",
+          "source_path": "data/d08_te.dat",
+          "bytes": 799680,
+          "sha256": "c0637f02f23b79890b43cfee9604818ad6d7f81532223d76acf1da0d6e2a2cc1"
+        },
+        {
+          "path": "data/raw/tep/data/d09.dat",
+          "source_path": "data/d09.dat",
+          "bytes": 399840,
+          "sha256": "cb9146da760cdd52cad575d745413a5cfb4b447af2db9fb6a424cf6881ff0fcd"
+        },
+        {
+          "path": "data/raw/tep/data/d09_te.dat",
+          "source_path": "data/d09_te.dat",
+          "bytes": 799680,
+          "sha256": "513df6c3a4fd48e0eaddb0002cd8cdab3a78a5c83c47883bb52d2dc6c2472428"
+        },
+        {
+          "path": "data/raw/tep/data/d10.dat",
+          "source_path": "data/d10.dat",
+          "bytes": 399840,
+          "sha256": "e08697b5d074aea2345434bc4d26296f5dbdbb7efbf37a1bbee292b2ce765e8f"
+        },
+        {
+          "path": "data/raw/tep/data/d10_te.dat",
+          "source_path": "data/d10_te.dat",
+          "bytes": 799680,
+          "sha256": "3a278be79d8d111fc60be3cfb4f961c28e2dc632f17eb519886aa0f95864ffc6"
+        },
+        {
+          "path": "data/raw/tep/data/d11.dat",
+          "source_path": "data/d11.dat",
+          "bytes": 399840,
+          "sha256": "8294734d6f6e8f6b8643b9dc72f38ce40afd868d30dee9368a0d26b963a0af9f"
+        },
+        {
+          "path": "data/raw/tep/data/d11_te.dat",
+          "source_path": "data/d11_te.dat",
+          "bytes": 799680,
+          "sha256": "6d60a4c932d918e1ab26ae5d16320936a665f3aad3f05482d23f5c4550b9f29a"
+        },
+        {
+          "path": "data/raw/tep/data/d12.dat",
+          "source_path": "data/d12.dat",
+          "bytes": 399840,
+          "sha256": "62fcb3c71c0eda8eaaaf707f35296e60b17baaf9a9aef588687532cf4c560d38"
+        },
+        {
+          "path": "data/raw/tep/data/d12_te.dat",
+          "source_path": "data/d12_te.dat",
+          "bytes": 799680,
+          "sha256": "2180fcecb01d1b110b429ba2969d6b18dcc625599e3640e54f69afa32dccbe50"
+        },
+        {
+          "path": "data/raw/tep/data/d13.dat",
+          "source_path": "data/d13.dat",
+          "bytes": 399840,
+          "sha256": "f755d4ab6dc1d30e36c2e4604eeb0baff4b91032f487398b97fb1220eda861dd"
+        },
+        {
+          "path": "data/raw/tep/data/d13_te.dat",
+          "source_path": "data/d13_te.dat",
+          "bytes": 799680,
+          "sha256": "2e34e0c427d6e41d77d6cae76550b7e95004f9f13bc093278ecf5c282a1c9f03"
+        },
+        {
+          "path": "data/raw/tep/data/d14.dat",
+          "source_path": "data/d14.dat",
+          "bytes": 399840,
+          "sha256": "29fda7d5cae58cb7240e569e2d2d436371d077d282187d9205c7dc01df8755af"
+        },
+        {
+          "path": "data/raw/tep/data/d14_te.dat",
+          "source_path": "data/d14_te.dat",
+          "bytes": 799680,
+          "sha256": "e8976d056c0769cebbcec3bcba89d2468040ccae7acbea55ebc3b2e56b217396"
+        },
+        {
+          "path": "data/raw/tep/data/d15.dat",
+          "source_path": "data/d15.dat",
+          "bytes": 399840,
+          "sha256": "4c82fe0864cce2521e91a2c3e59d8630627c5e633cffe83f5e34ebc9901b5bca"
+        },
+        {
+          "path": "data/raw/tep/data/d15_te.dat",
+          "source_path": "data/d15_te.dat",
+          "bytes": 799680,
+          "sha256": "a7242b956837bec8ca7f224d01805247f2aea6ea868eaa064e068b5c0761b1e5"
+        },
+        {
+          "path": "data/raw/tep/data/d16.dat",
+          "source_path": "data/d16.dat",
+          "bytes": 399840,
+          "sha256": "ca1dfc5e31292052e83dcf6b4f60a73da197eb8a47e65d908ed7ac3cbcccb007"
+        },
+        {
+          "path": "data/raw/tep/data/d16_te.dat",
+          "source_path": "data/d16_te.dat",
+          "bytes": 799680,
+          "sha256": "8381d7371aac49b498e7bf93149b77a0a6bbeffe73520881dcbe8ae96277244d"
+        },
+        {
+          "path": "data/raw/tep/data/d17.dat",
+          "source_path": "data/d17.dat",
+          "bytes": 399840,
+          "sha256": "596aad6421a64d257bfa098cd5c4664d46dc49d88d1bad86cbc9518e6cd69e42"
+        },
+        {
+          "path": "data/raw/tep/data/d17_te.dat",
+          "source_path": "data/d17_te.dat",
+          "bytes": 799680,
+          "sha256": "27d2d72052064e3cbb7a45df8073f15bb83b77403f532616e73c8869b043e7c9"
+        },
+        {
+          "path": "data/raw/tep/data/d18.dat",
+          "source_path": "data/d18.dat",
+          "bytes": 399840,
+          "sha256": "b4d182c070036104cf150bc33f7aa879805f19943eb298bc05bdc8647dc70291"
+        },
+        {
+          "path": "data/raw/tep/data/d18_te.dat",
+          "source_path": "data/d18_te.dat",
+          "bytes": 799680,
+          "sha256": "1db5b93a7daa58ed1b641845b58ad818546ced7f3de866c086da18a7ebef5041"
+        },
+        {
+          "path": "data/raw/tep/data/d19.dat",
+          "source_path": "data/d19.dat",
+          "bytes": 399840,
+          "sha256": "ee3d2a50285cb3ba5e52ec05ea7cb39dc2b574bec592af9d44c192be132aeea6"
+        },
+        {
+          "path": "data/raw/tep/data/d19_te.dat",
+          "source_path": "data/d19_te.dat",
+          "bytes": 799680,
+          "sha256": "c24dd77f787f89347273addc8a453d79f0b99edd64d43be11a5e0907bd515c5f"
+        },
+        {
+          "path": "data/raw/tep/data/d20.dat",
+          "source_path": "data/d20.dat",
+          "bytes": 399840,
+          "sha256": "acdfe6c256fa6de74a811d6c7df1b710a9f0ed60f48242be92f3fa30db3df6b3"
+        },
+        {
+          "path": "data/raw/tep/data/d20_te.dat",
+          "source_path": "data/d20_te.dat",
+          "bytes": 799680,
+          "sha256": "e54035eda95311f13dd095f87607d97a89b7541afa2a3f68af098f33a5e2e6e5"
+        },
+        {
+          "path": "data/raw/tep/data/d21.dat",
+          "source_path": "data/d21.dat",
+          "bytes": 399840,
+          "sha256": "f34a9fefffef04ef1f49b3fb74e3def0010cda27a8577d814dd50604e2f8dc09"
+        },
+        {
+          "path": "data/raw/tep/data/d21_te.dat",
+          "source_path": "data/d21_te.dat",
+          "bytes": 799680,
+          "sha256": "b6823aa09638cd59cb168bc24f991b6d4d557d8aea62b0b2a87ee67c21ba5a83"
+        },
+        {
+          "path": "data/raw/tep/LICENSE",
+          "source_path": "LICENSE",
+          "bytes": 3367,
+          "sha256": "70a00a943dd2ef2a1749e694fca4340b588a9c71764e9860d4854e1362a8030d"
+        },
+        {
+          "path": "data/raw/tep/UPSTREAM_README.md",
+          "source_path": "README.md",
+          "bytes": 30296,
+          "sha256": "8d94edeb9e182f9e64f40a27fcfa1ead7f38c62d7dd09a76e0ebc0d29998f2c3"
+        }
+      ],
+      "total_bytes": 26442427
+    },
+    {
+      "id": "skab",
+      "url": "https://github.com/waico/SKAB",
+      "revision": "b2c0d46c2971dcbfe71e26087b6d231998bb91c2",
+      "scope": "data/ 下全部 CSV 与原说明；不含上游算法和 Notebook",
+      "license_note": "上游标注 GPL v3.0，保留 LICENSE；不沿用旧配置的 BSD 标记",
+      "intended_task": "multivariate_detection",
+      "files": [
+        {
+          "path": "data/raw/skab/data/README.md",
+          "source_path": "data/README.md",
+          "bytes": 2462,
+          "sha256": "5696f68f1ceb4db1a7616f1a27e3675c6a9b63b123c8cbbc5390a0faff58b39b"
+        },
+        {
+          "path": "data/raw/skab/data/anomaly-free/anomaly-free.csv",
+          "source_path": "data/anomaly-free/anomaly-free.csv",
+          "bytes": 814703,
+          "sha256": "7641a8742957100ef424dd97adfb3eeab27d4d180645fe2b3c49b7f7146ae9a6"
+        },
+        {
+          "path": "data/raw/skab/data/other/1.csv",
+          "source_path": "data/other/1.csv",
+          "bytes": 70326,
+          "sha256": "3beaf861bdfe9b4f4eff8e7567c1dd3f506fbd0ce667fc9399d04bd2dc70623d"
+        },
+        {
+          "path": "data/raw/skab/data/other/10.csv",
+          "source_path": "data/other/10.csv",
+          "bytes": 124516,
+          "sha256": "72683644f6f17689f619076a66a9ec02cbc0502bd669924c4c33951d1bdad9b0"
+        },
+        {
+          "path": "data/raw/skab/data/other/11.csv",
+          "source_path": "data/other/11.csv",
+          "bytes": 112720,
+          "sha256": "98a2fff3b6516205ae2e12f2dd30d7f08465fe4321a1bd5cf823396985ecb37b"
+        },
+        {
+          "path": "data/raw/skab/data/other/12.csv",
+          "source_path": "data/other/12.csv",
+          "bytes": 99534,
+          "sha256": "b0882efbcf2669223ae78bee61c9f10074a9b2375f0e86b8957ae5ce4aad1e72"
+        },
+        {
+          "path": "data/raw/skab/data/other/13.csv",
+          "source_path": "data/other/13.csv",
+          "bytes": 87634,
+          "sha256": "b3f1da02064d11234836a9fa1a2536bb0d3b6c6998ab60b0b71869b98e94d860"
+        },
+        {
+          "path": "data/raw/skab/data/other/14.csv",
+          "source_path": "data/other/14.csv",
+          "bytes": 85828,
+          "sha256": "c7f361e55397cc9efd4a76b6876111eda79b650d10aeb007342ca5972152eaef"
+        },
+        {
+          "path": "data/raw/skab/data/other/2.csv",
+          "source_path": "data/other/2.csv",
+          "bytes": 73661,
+          "sha256": "951c326bf36366fa7615b8f28d22f80b3878036069a690f42b3e223737a6a8d1"
+        },
+        {
+          "path": "data/raw/skab/data/other/3.csv",
+          "source_path": "data/other/3.csv",
+          "bytes": 107404,
+          "sha256": "f3c19a89f74f62a475c246b9263f161f7a734dd88304de803939cebaa55c7ebd"
+        },
+        {
+          "path": "data/raw/skab/data/other/4.csv",
+          "source_path": "data/other/4.csv",
+          "bytes": 112334,
+          "sha256": "56ca23f4eb61d1347d079eb9a35c60a59b8b64e160c00dd0c2ec69e0df0b2a4b"
+        },
+        {
+          "path": "data/raw/skab/data/other/5.csv",
+          "source_path": "data/other/5.csv",
+          "bytes": 108203,
+          "sha256": "7347b326df3a92c0810c69add0e5621939af7a1c1cb4755081d088e72d36920f"
+        },
+        {
+          "path": "data/raw/skab/data/other/6.csv",
+          "source_path": "data/other/6.csv",
+          "bytes": 107422,
+          "sha256": "eb8f05622a62c855040ea358b87be35fb1a4a3720ba0610569bab384db4b6e04"
+        },
+        {
+          "path": "data/raw/skab/data/other/7.csv",
+          "source_path": "data/other/7.csv",
+          "bytes": 102054,
+          "sha256": "1bee14f49bfc817ba2c335fb427baa71153d8f8ab52e72652f15f74e4b77daec"
+        },
+        {
+          "path": "data/raw/skab/data/other/8.csv",
+          "source_path": "data/other/8.csv",
+          "bytes": 107600,
+          "sha256": "12c138ed99c198e0a7ece886fe01bfd16bbdde206fad6c5d74322b6b9d6488d0"
+        },
+        {
+          "path": "data/raw/skab/data/other/9.csv",
+          "source_path": "data/other/9.csv",
+          "bytes": 108481,
+          "sha256": "11c4514b0bc706acff637fea6707ad9258ac878fe9dff3d0b11d2b618d94d8ea"
+        },
+        {
+          "path": "data/raw/skab/data/valve1/0.csv",
+          "source_path": "data/valve1/0.csv",
+          "bytes": 110346,
+          "sha256": "16af3f71313a23dd33d9b7b8065d836d05c3f9257588881cc7fbe07c076d9dc8"
+        },
+        {
+          "path": "data/raw/skab/data/valve1/1.csv",
+          "source_path": "data/valve1/1.csv",
+          "bytes": 110330,
+          "sha256": "fe4493bf805baef4e6dfb864094275d8cc2ea80a16b3735e2752b18b6aefd812"
+        },
+        {
+          "path": "data/raw/skab/data/valve1/10.csv",
+          "source_path": "data/valve1/10.csv",
+          "bytes": 110623,
+          "sha256": "ee16be8e4b870c779491e3d1dc9e0ecbfaf29eb013e032abff7a33f2cbbfe2ad"
+        },
+        {
+          "path": "data/raw/skab/data/valve1/11.csv",
+          "source_path": "data/valve1/11.csv",
+          "bytes": 110166,
+          "sha256": "89660fae4ed5c918db014409bbbc29f498fd99c7e956fab2620d18dea700a973"
+        },
+        {
+          "path": "data/raw/skab/data/valve1/12.csv",
+          "source_path": "data/valve1/12.csv",
+          "bytes": 110061,
+          "sha256": "90adfa9bc86d4556e6a4ce734436fd5685af79c189cd9828f8df75a7f468ce07"
+        },
+        {
+          "path": "data/raw/skab/data/valve1/13.csv",
+          "source_path": "data/valve1/13.csv",
+          "bytes": 110455,
+          "sha256": "d6cb6a97437215d3066a87e1fcc5fa4e68017629c043c5315920e3cf1060841c"
+        },
+        {
+          "path": "data/raw/skab/data/valve1/14.csv",
+          "source_path": "data/valve1/14.csv",
+          "bytes": 110181,
+          "sha256": "5f0bb9bc33c5e6c259263e32e25915c4d24c82b0a94554d48808626da05c1d71"
+        },
+        {
+          "path": "data/raw/skab/data/valve1/15.csv",
+          "source_path": "data/valve1/15.csv",
+          "bytes": 111352,
+          "sha256": "75cc86ab25d7091eee024739fa06d048753480d5d7d1507077231cab4f1b7a7e"
+        },
+        {
+          "path": "data/raw/skab/data/valve1/2.csv",
+          "source_path": "data/valve1/2.csv",
+          "bytes": 103507,
+          "sha256": "90492413469261886c8896c327241448df5da73fd7739cabfec8dd82de3c0ce4"
+        },
+        {
+          "path": "data/raw/skab/data/valve1/3.csv",
+          "source_path": "data/valve1/3.csv",
+          "bytes": 110534,
+          "sha256": "cb6afea108eddfd8447307e405f86bbb764b8d8e9130d7849a46e1303e19b8b2"
+        },
+        {
+          "path": "data/raw/skab/data/valve1/4.csv",
+          "source_path": "data/valve1/4.csv",
+          "bytes": 105634,
+          "sha256": "983aed9dc09991a57911091373c580e1b86d06aa983cd51678f108fd8d709654"
+        },
+        {
+          "path": "data/raw/skab/data/valve1/5.csv",
+          "source_path": "data/valve1/5.csv",
+          "bytes": 111575,
+          "sha256": "78974991ec87b7f9b9b6b2944f4b525468a9beb36c59b06cd7650d9a15eca14a"
+        },
+        {
+          "path": "data/raw/skab/data/valve1/6.csv",
+          "source_path": "data/valve1/6.csv",
+          "bytes": 111676,
+          "sha256": "97469c0e0c9c0e0ee5d30794f1f36c6785df5816a112a8b16c59637e8c894685"
+        },
+        {
+          "path": "data/raw/skab/data/valve1/7.csv",
+          "source_path": "data/valve1/7.csv",
+          "bytes": 105941,
+          "sha256": "ca2c9c6d6fa302c642acec6fbedac495bd12fececeee0a755d45a54e340e0f30"
+        },
+        {
+          "path": "data/raw/skab/data/valve1/8.csv",
+          "source_path": "data/valve1/8.csv",
+          "bytes": 110305,
+          "sha256": "0c4afb92248b5b35b4c9d734a91ed8318346901f04579074903730569e60416c"
+        },
+        {
+          "path": "data/raw/skab/data/valve1/9.csv",
+          "source_path": "data/valve1/9.csv",
+          "bytes": 110586,
+          "sha256": "2aa1ae1b2ff505caecda24802b877dc686924bbbeeb7e7db4faa261efb5ed5bd"
+        },
+        {
+          "path": "data/raw/skab/data/valve2/0.csv",
+          "source_path": "data/valve2/0.csv",
+          "bytes": 109156,
+          "sha256": "a6670e7a68c7c6ba62c649bd9d350633e80db624578e9529f2b736ced5e32bde"
+        },
+        {
+          "path": "data/raw/skab/data/valve2/1.csv",
+          "source_path": "data/valve2/1.csv",
+          "bytes": 102680,
+          "sha256": "b35d27f664eb0851ab73e5eb06633404c7eeaf532edff7e40c68eb9379f2012b"
+        },
+        {
+          "path": "data/raw/skab/data/valve2/2.csv",
+          "source_path": "data/valve2/2.csv",
+          "bytes": 109005,
+          "sha256": "2c3005cf28b88db715b7f4694e826ff252cba4dbb1eba679b040961f80477e60"
+        },
+        {
+          "path": "data/raw/skab/data/valve2/3.csv",
+          "source_path": "data/valve2/3.csv",
+          "bytes": 96048,
+          "sha256": "86927555d5c523e587d41500bd5dee4e2468289ec1b988ac17755aeae697d7f8"
+        },
+        {
+          "path": "data/raw/skab/LICENSE",
+          "source_path": "LICENSE",
+          "bytes": 35149,
+          "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+        },
+        {
+          "path": "data/raw/skab/UPSTREAM_README.md",
+          "source_path": "README.md",
+          "bytes": 10712,
+          "sha256": "238f1a345a8fccd67540f16bce10c26dbfd7912f196832d5c165f73b8779c222"
+        }
+      ],
+      "total_bytes": 4440904
+    },
+    {
+      "id": "pronto",
+      "url": "https://zenodo.org/records/1341583",
+      "doi": "10.5281/zenodo.1341583",
+      "archive_md5": "13b7464b88bd0a011c20cb26712e48e5",
+      "scope": "仅原压缩包的 Aligned and labelled alarm and process data 整个目录；不是完整 PRONTO 数据集",
+      "license_note": "原发布页条款为准，旧配置标记 CC BY 4.0，尚未独立核实该标记",
+      "intended_task": "multivariate_detection",
+      "files": [
+        {
+          "path": "data/raw/pronto/aligned/Testday2_merged.csv",
+          "source_path": "extracted/PRONTO benchmark case study/Pre-processed data/Aligned and labelled alarm and process data/Testday2_merged.csv",
+          "bytes": 2964251,
+          "sha256": "5396adc910560513f0413e5f2a9f1cb2cbd32d98b7fc1af8881847dd3c53be9d"
+        },
+        {
+          "path": "data/raw/pronto/aligned/Testday3_merged.csv",
+          "source_path": "extracted/PRONTO benchmark case study/Pre-processed data/Aligned and labelled alarm and process data/Testday3_merged.csv",
+          "bytes": 5045921,
+          "sha256": "abe1d895945a1e19a4025a7081abd159b06f27e4cdfe53a5610b327b95518540"
+        },
+        {
+          "path": "data/raw/pronto/aligned/Testday4_merged.csv",
+          "source_path": "extracted/PRONTO benchmark case study/Pre-processed data/Aligned and labelled alarm and process data/Testday4_merged.csv",
+          "bytes": 2737013,
+          "sha256": "9d24682206bcaa2952fa7d0a08c9628be692db5ebf9f69cb3c2d2a7e015f1e12"
+        },
+        {
+          "path": "data/raw/pronto/aligned/alarm_process_aligned_labelled.mat",
+          "source_path": "extracted/PRONTO benchmark case study/Pre-processed data/Aligned and labelled alarm and process data/alarm_process_aligned_labelled.mat",
+          "bytes": 4159729,
+          "sha256": "285b3a112ebf637bd2035c8ae86eb2b996c00a1a88e312f290eedcaabe924318"
+        },
+        {
+          "path": "data/raw/pronto/aligned/alarmsfault07092017_proc.csv",
+          "source_path": "extracted/PRONTO benchmark case study/Pre-processed data/Aligned and labelled alarm and process data/alarmsfault07092017_proc.csv",
+          "bytes": 23479,
+          "sha256": "8daeac7e999989c224a633829d2c76a75a455817bdec2bc81155f23d080ef3ba"
+        },
+        {
+          "path": "data/raw/pronto/aligned/alarmsonly11092017_proc.csv",
+          "source_path": "extracted/PRONTO benchmark case study/Pre-processed data/Aligned and labelled alarm and process data/alarmsonly11092017_proc.csv",
+          "bytes": 13813,
+          "sha256": "fed4389959c836c04af43a9dfd5515041d9777e023043812f1d42d6f5999593e"
+        },
+        {
+          "path": "data/raw/pronto/aligned/alarmsonly12092017_proc.csv",
+          "source_path": "extracted/PRONTO benchmark case study/Pre-processed data/Aligned and labelled alarm and process data/alarmsonly12092017_proc.csv",
+          "bytes": 13644,
+          "sha256": "072e72f77d2bb96ce93de7974596340442f6fd616a5d4b02795b0f206f371e32"
+        },
+        {
+          "path": "data/raw/pronto/aligned/readme.txt",
+          "source_path": "extracted/PRONTO benchmark case study/Pre-processed data/Aligned and labelled alarm and process data/readme.txt",
+          "bytes": 1113,
+          "sha256": "1efa39c7cf68d8bb7435992d01d06193a2e90f7e0c9328a1a3610554ebd4e1b1"
+        }
+      ],
+      "total_bytes": 14958963
+    },
+    {
+      "id": "power_plant",
+      "url": "https://ieee-dataport.org/documents/dataset-delay-timer-design",
+      "paper_doi": "10.1016/j.jprocont.2022.01.002",
+      "scope": "Example3/Data_20101.mat 原文件；不含 MATLAB 方法代码",
+      "license_note": "尚未确认原数据再分发条件；当前仅作本地副本",
+      "intended_task": "univariate_detection",
+      "files": [
+        {
+          "path": "data/raw/power_plant/Data_20101.mat",
+          "source_path": "Data_20101.mat",
+          "bytes": 3904659,
+          "sha256": "113e8614a4cffe3ae24a04bfae5472718cb9dbc32259be2888dea1ed0b2ecff5"
+        }
+      ],
+      "total_bytes": 3904659
+    }
+  ]
+}
