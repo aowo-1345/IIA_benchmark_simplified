@@ -10,9 +10,11 @@ import pandas as pd
 class SignalSegment:
     """One uninterrupted interval, values [N,D], time in seconds.
 
-    source_indices are zero-based sample positions within the original run,
-    NOT physical row positions in the long process_values table. Together with
-    run_id and feature_names they map each output row/column back to its source.
+    source_indices are positions on the selected Tag/group's unfiltered time
+    axis within the run, NOT physical rows of the long process_values table.
+    In matrix/vector sources (TEP/MAT) these equal original sample positions.
+    Unrelated asynchronous Tags must not change that axis. Together with run_id,
+    timestamps and feature_names they map each output row/column to source facts.
     Missing/invalid samples or time gaps must break segments before this point.
     """
 

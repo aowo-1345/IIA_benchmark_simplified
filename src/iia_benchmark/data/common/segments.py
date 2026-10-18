@@ -65,8 +65,8 @@ def _aligned_run(bundle, tags, run_id):
     run = bundle.process_values.loc[bundle.process_values.run_id == run_id]
     if run.empty or not set(tags) <= set(run.tag_id):
         raise ValueError(f"unknown run/tags: {run_id}, {tags}")
-    timeline = np.sort(run.timestamp.unique())
     selected = run[run.tag_id.isin(tags)]
+    timeline = np.sort(selected.timestamp.unique())
     matrix = selected.pivot(index="timestamp", columns="tag_id", values="value").reindex(index=timeline, columns=tags)
     quality = selected.pivot(index="timestamp", columns="tag_id", values="quality_flag").reindex(index=timeline, columns=tags)
     return matrix, quality, timeline

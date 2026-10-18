@@ -65,6 +65,22 @@ def test_alignment_rejects_missing_and_preserves_unknown(tmp_path):
     assert reference_for(bundle, parts[0]) is None
 
 
+def test_unrelated_asynchronous_tag_cannot_change_group_alignment_or_indices():
+    from iia_benchmark.data.common.segments import select_segments
+    records = [{"run_id": "r", "timestamp": float(t), "tag_id": tag, "value": float(t+offset), "quality_flag": True}
+               for t in range(3) for tag, offset in (("x", 0), ("y", 10))]
+    target_only = DatasetBundle(pd.DataFrame(records))
+    extra = {"run_id": "r", "timestamp": .5, "tag_id": "unrelated", "value": 99., "quality_flag": True}
+    bundle = DatasetBundle(pd.DataFrame(records+[extra]))
+    expected = select_segments(target_only, ("y", "x"), "r", maximum_gap_seconds=1)[0]
+    for policy in ("reject", "break_continuity"):
+        segments = select_segments(bundle, ("y", "x"), "r", missing=policy, maximum_gap_seconds=1)
+        assert len(segments) == 1
+        np.testing.assert_array_equal(segments[0].values, expected.values)
+        np.testing.assert_array_equal(segments[0].timestamps, [0., 1., 2.])
+        np.testing.assert_array_equal(segments[0].source_indices, [0, 1, 2])
+
+
 def test_mat_values_missing_settings_and_continuity_survive_two_adapters(tmp_path):
     from scipy.io import savemat
     from iia_benchmark.data.datasets.power_plant.bundle import load_bundle as load_power
