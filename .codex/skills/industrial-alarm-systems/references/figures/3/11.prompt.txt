@@ -1,0 +1,8 @@
+Use case: scientific-educational. Chinese textbook infographic, landscape 3:2, opaque white background, navy headings, blue/teal region diagrams, orange excluded points, generous whitespace, readable at laptop size. Title “冷凝器：物理模型怎样变成报警边界”.
+Top connected sequence with four boxes:
+“多组历史，分别估参数” → “保留通过验证的物理模型” → “在相同运行约束下生成允许组合” → “得到多个候选运行区”.
+Under first boxes four small labels exactly “Pc 压力”, “Dc 蒸汽流量”, “T1 进水温度”, “T2 出水温度”. Do not add other sensors.
+Middle left heading “为什么区域不止一个？” Show three slightly different overlapping region outlines A,B,C (smooth generic 2D projections), caption “参数估计有差异，允许边界也会变化” and “二维仅为示意，实际检查四变量组合”.
+Middle right heading “怎样比较一个候选区域？” Draw two overlapping outlines: solid blue “待选区域” and dashed teal “一个参考区域”. Shade ONLY reference outside selected in orange labeled “参考允许、待选排除：可能误报”; shade ONLY selected outside reference in pale purple labeled “待选允许、参考排除：可能漏报”. Shared intersection stays neutral. No exact area ratios.
+Bottom three connected cards “对每个候选，分别取最不利的两项代价” → “按权重比较，选代价较小的区域” → “估计不确定上界；不足则补充历史”. Finally a small output box “新组合：区内不报警，区外报警”.
+Footer exact “AI 讲解示意：区域差异指标不同于按现场标签统计的 FAR/MAR；结论依赖模型与候选范围。” No performance percentages, no certification claim, no assumption arbitrary historical points all normal.

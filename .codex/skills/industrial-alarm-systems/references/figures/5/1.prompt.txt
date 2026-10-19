@@ -1,0 +1,15 @@
+Use case: scientific-educational. New Chinese textbook infographic, landscape 3:2, opaque white, navy text, blue timelines, orange/teal accents, readable and uncluttered.
+Title “这一章要做什么？” Subtitle “报警很多以后：识别洪泛、查历史、找模式、预测后续”.
+Top one event stream with repeated A and nearby B,C,D, labeled “已有报警状态 / 发生与解除日志”. Four branching arrows to four independent cards:
+1 heading “现在是否洪泛？” draw recent time window and unique Tag tokens; caption “看近期需要关注的报警变量” output “洪泛状态 + 相关 Tag”.
+2 heading “像哪次历史？” draw two ordered rows “A B C D” and “A B X C D” joined matched links; caption “保留次序，做局部对齐” output “相似历史 + 对齐片段”.
+3 heading “哪些常一起出现？” draw unordered braces “{A,B}” and “{A,C}”; caption “每次洪泛变成一个事务集合” output “频繁模式 + 历史编号”.
+4 heading “接下来可能报什么？” draw observed prefix “A → B → ?” and three small candidate cards C,D,E; caption “只用已发生前缀与历史联系” output “候选报警排名”.
+No arrows between the four cards: these are distinct questions, not a mandatory four-stage suppression pipeline.
+Footer exactly “AI 讲解示意：状态、序列、集合、前缀保留的信息不同；分析结果不自动授权抑制报警。” No performance metrics, no fabricated experiment values.
+
+Edit pass:
+Edit ONLY the dashed correspondence lines in the SECOND card “像哪次历史？”. Preserve all other content and layout exactly.
+Top row is current sequence A B C D; bottom row is historical sequence A B X C D. There must be exactly FOUR dashed matching lines: top A→bottom A; top B→bottom B; top C→bottom C (fourth bottom token); top D→bottom D (fifth bottom token).
+The bottom gray X token must have NO matching line from any top token, because it is the extra event. Remove any top C→bottom X or duplicate C correspondence.
+Do not alter labels, tokens, or any other panel.

@@ -1,0 +1,8 @@
+Use case: scientific-educational. Chinese teaching infographic, landscape 3:2, opaque white, navy headings, blue prefix arrows, teal history cards, orange predicted-candidate highlight. Clear readable text, no paragraphs.
+Title “下一报警预测：把历史联系变成候选概率”.
+LEFT “当前已发生什么？” show “A → B” then “?”; caption “只用已经看到的前缀”. Candidate cards C,D,E under note “从历史 Tag 中去掉已经出现的 Tag”.
+CENTER “历史提供哪些约束？” three separate short historical sequences with timestamps in seconds: “A(0) → B(2) → C(5)”, “B(0) → A(1) → C(4)”, “A(0) → B(2) → D(6)”. Explicit label “教学示例，不据此给出计算概率”.
+Two feature boxes: “通常先后关系：候选是否常在已发生报警之后” and “近同时反序关系：时间越近，保留联系的权重越大”. Note “容忍尺度 σ 由使用者设置”.
+RIGHT “怎样得到预测？” Three connected boxes “让模型符合历史特征统计” → “在这些约束下，选择最大熵概率分布” → “给尚未出现的候选排序”. Do not assign numerical probabilities or an unsupported winner; show equal-sized candidate cards “候选 C”, “候选 D”, “候选 E” labeled “按求解后的概率排序”.
+Bottom exact explanatory line “最大熵：满足已有统计约束，避免额外强加没有依据的偏好”.
+Footer exact “AI 讲解示意：预测的是下一报警 Tag，不是故障名称；未见 Tag 与新工况可能超出历史覆盖。” No claim future data used, no black-box distribution from nowhere, no fake optimal probabilities.

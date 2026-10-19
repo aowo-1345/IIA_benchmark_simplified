@@ -1,0 +1,6 @@
+Use case: scientific-educational. New Chinese learning infographic, landscape 3:2, white background, navy headings, blue and orange curves, large legible text, modest concise wording. Title “电泵：先用旧模型检查，再决定是否更新”.
+Top row inputs three boxes exactly “转速 r”, “流量 q”, “压差 Δp”, arrows into box “上一窗的关系模型”. Formula small but legible “Δp ≈ b0 + b1·r² + b2·q·r + b3·q²”. Model arrow to “预测压差”, measured Δp separately into a subtraction node labeled “实测 − 预测 = 误差”.
+Middle: arrow to box “最近一窗误差相加，再取绝对值”, then box “累计误差信号 ϕ”, compare to line labeled “阈值 ϕth”, then output card “当前是否报警”. Avoid drawing any formula for sum of absolute errors; it must be absolute of SUM.
+Bottom: TWO branches from card “每窗结束，统计报警次数 Aj”. Branch 1 “Aj 不超过 Aα” → “融合旧模型与新数据，更新系数”; branch 2 “Aj 超过 Aα” → “保留旧系数，暂不学习这窗”. A return arrow from both leads to top model with caption “下一窗使用”. Explain “Aα 由正常误报假设与显著性水平确定” in small note.
+Side compact contrast boxes “正常缓变：允许跟随” and “异常快变：希望误差显现”. Caption exact “离线先用正常、异常历史选择更新参数和误差阈值”.
+Footer exact “AI 讲解示意：窗口判断是模型结果，不是独立故障真值；慢变与快变特征需验证。” No invented measured values or Bayesian fault diagnosis, no generic auto-learning every sample.

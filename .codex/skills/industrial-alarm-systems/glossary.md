@@ -1,0 +1,51 @@
+# 术语表
+
+原书见 [参考 PDF](references/source.pdf)；具体页码在各章笔记中。按英文术语排列。
+
+- **AAD — Averaged Alarm Delay**：异常开始后首次有效报警等待时间的期望，需区分采样步数与物理时间。（ch02）
+- **A&E — Alarm & Event**：报警发生、恢复、确认、操作等时间戳事件记录。（ch06）
+- **Alarm configuration**：选择应配置报警的过程变量、优先级并检查错误配置。（ch01）
+- **Alarm deadband**：通过不同激活/解除边界与状态保持，减少干扰切换；参数约定须核对。（ch02）
+- **Alarm delay timer**：连续满足条件一定采样数才激活或解除的状态机制。（ch02）
+- **Alarm design**：为选定过程变量设计报警生成机制及参数。（ch01–03）
+- **Alarm duration**：一次报警发生到解除的持续长度。（ch02、ch05）
+- **Alarm flood**：在特定计数、时间窗及人员范围下的报警过载情形。（ch05–06）
+- **Alarm interval**：报警解除到下次发生之间的非报警间隔。（ch02）
+- **Alarm Probability Plot**：统计测量到达某数值区间后，继续走向原阈值或更高区间的可能性与步数，辅助寻找更早且有依据的提醒位置。（ch02）
+- **Alarm removal**：查因、决定处置并消除报警对应异常的研究阶段。（ch01）
+- **Alarm variable**：表示某报警是否处于报警状态的离散变量。（ch01）
+- **ATG — Adaptive Time Gradient**：依据波动调整时间尺度的梯度估计方法。（ch03）
+- **Bad actor**：造成较大报警负担、应优先排查的报警。（ch06）
+- **Bayesian estimation**：结合先验和观测估计后验及区间；在持续时间、模型和根因中用途不同。（ch02–04）
+- **BLAST**：通过短种子定位与延展加速局部序列对齐的思路。（ch05）
+- **CHARM**：利用事务编号集合挖掘闭合频繁项集的算法。（ch05）
+- **Chattering alarm**：短时间反复在报警与非报警状态间切换的报警。（ch01、ch05）
+- **Closed frequent pattern**：达到支持度要求且没有同支持度更大超集的报警集合。（ch05）
+- **Convex hull / Quickhull**：凸包区域及其求解算法，用于凸 NOZ。（ch03）
+- **Criterion C**：按新出现及状态保留的报警变量集合检测洪泛的判据。（ch05）
+- **Deadband Index**：结合干扰持续时间与幅度的死区适用性指标。（ch02）
+- **Dynamic alarm thresholds**：随相关变量当前值变化的工程量上下限。（ch03）
+- **FAR**：§2.1 为正常状态报警概率；§2.2 式 2.29 为正常期原始越限段中长度达到 n 的比例，不等于完整重放后的事件数比例。（ch02）
+- **GIS — Generalized Iterative Scaling**：调整最大熵模型权重，使特征统计与历史经验约束接近的迭代求解方法。（ch05）
+- **HDAP — High Density Alarm Plot**：按 Tag×时间格显示发生次数的热图；长横带不直接表示一直未解除。（ch06）
+- **IGTE / IGDTE**：信息粒及聚类表示上的信息流/直接信息流度量。（ch04）
+- **IID**：独立同分布；弱自相关本身不足以证明该假设。（ch02）
+- **Information granulation**：本书将不重叠短窗表示为支撑范围与中位中心，再聚类估计状态频数；不是直接给点贴故障标签。（ch04）
+- **Jaccard similarity**：集合交集大小与并集大小之比。（ch05）
+- **KDE**：核密度估计，§2.1用来估计正常、异常过程分布。（ch02）
+- **Long-standing alarm**：长时间未解除、持续占据报警状态的报警。（ch05–06）
+- **MAR**：§2.1 为异常状态未报警概率；§2.2 式 2.30 为异常期原始回落段中长度达到 n 的比例，需结合该节定义和公式疑点使用。（ch02）
+- **Maximum entropy**：在已有特征约束下选条件熵最大的概率分布，用于下一报警预测。（ch05）
+- **Near miss**：过程偏离并随后返回正常运行范围的情形。（ch01）
+- **NOZ — Normal Operating Zone**：相关变量正常联合取值形成的允许区域。（ch03）
+- **NTE / NDTE**：面向报警序列的归一化信息流/直接信息流度量。（ch04）
+- **OPTICS**：基于密度的聚类方法，本书用于信息粒状态和概率估计。（ch04）
+- **Pettitt test**：非参数单变点检验，递归应用可寻找多个均值变化位置。（ch02）
+- **PLR — Piecewise Linear Representation**：用分段直线描述时序趋势。（ch04）
+- **Quasi-alarm**：将异常期未越限间隔等价为反向报警的表示。（ch02）
+- **Representative alarm pattern**：对相似闭合模式取并集形成的概括；关联 TID 并不证明并集中所有 Tag 曾同时出现。（ch05）
+- **Search cone**：按角度分区与径向边界组合描述非凸正常区的几何单元。（ch03）
+- **Support / TID**：模式出现的事务支持及其洪泛事务编号。（ch05）
+- **Surrogate data**：用于显著性检验的无因果参考序列，保留指定统计特征。（ch04）
+- **SW — Smith–Waterman**：允许匹配、错配和间隙的局部序列对齐算法。（ch05）
+- **TE — Transfer Entropy**：给定目标自身过去时，来源过去对目标未来提供的信息量。（ch04）

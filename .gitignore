@@ -3,21 +3,10 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 .venv/
-.codex/
-data/raw/
 /experiments/
 
 .scratch/
 .idea/
 .envrc
 .envrc.*
-.agents/
 docs/reviews/
-
-# 本地文档与汇报材料不纳入版本管理；保留项目说明、共享约定和设计文档。
-*.md
-!/README.md
-!/AGENTS.md
-!docs/design.md
-*.ppt
-*.pptx

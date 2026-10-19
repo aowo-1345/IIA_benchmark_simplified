@@ -1,0 +1,6 @@
+Use case: scientific-educational. Chinese textbook infographic, landscape 3:2, opaque white, navy headings, blue input nodes, orange alarm node, teal outputs, crisp legible Chinese text and whitespace.
+Title “已知候选原因：比较原因组合，而不是只选最早一个”.
+LEFT “已有观测与结构”. Draw two parent nodes “X1：原因 1 是否有效” and “X2：原因 2 是否有效”, arrows into one child “A：是否报警”. State “父节点与结构来自工艺知识” and “本节假设候选原因相互独立”.
+CENTER “历史与新观测更新什么？” Show small observation rows with columns X1,X2,A (binary values, no posterior claims). Two connected cards “更新每个原因有效的概率” and “更新每种组合下报警的概率”. Below four equal cards labeled exactly “00：都无效”, “10：仅原因 1”, “01：仅原因 2”, “11：两个同时有效”. Do not assign a particular index number to all-zero combination.
+RIGHT “报警发生后怎样判断？” Show equation in words “组合原有可能性 × 该组合下的报警可能性”, then “归一化 → 各组合后验”, then “选择后验最大的组合”. Small result branches “10 / 01 / 11：提示相应已知原因” and “00 若最高：提示可能有未列出的原因”. The latter is not proof of a specific unknown fault.
+Footer exact “AI 讲解示意：递归更新是逐次融合观测；后验依赖候选集合、结构与观测质量。” No invented posterior numbers, no claim arbitrary Bayesian structure automatically learned.

@@ -1,0 +1,13 @@
+Use case: scientific-educational. New Chinese textbook infographic, landscape 3:2, opaque white background, large legible navy Chinese text, blue measured signals, restrained teal and orange highlights, generous whitespace. Title exactly “这一章要做什么？” Subtitle “多变量报警：检查测点之间的正常关系”.
+Top wide panel: two synchronized small traces labeled “流量” and “电流” enter a single scatter plot showing a narrow rising blue normal band. A point outside the band is orange; do not give exact numbers. Labels “先确认工艺关联，并把同一时刻的数据对齐” and “单点没有越限，组合也可能不合理”.
+Below, show four separate rounded cards, NOT consecutive steps, with no arrows between cards:
+1 “数值搭配” / “正常历史 → 联合正常区” / “输出联合报警与动态限值”. draw normal cloud with boundary and outside point.
+2 “变化方向” / “工艺规则 + 历史 → 趋势判定” / “正常应同向，反向时报警”. draw two small opposing arrows.
+3 “电泵关系” / “转速、流量、压差 → 可更新模型” / “看模型误差是否异常增大”. draw a pump and measured/predicted curves, qualitative only.
+4 “冷凝器关系” / “历史估参数 + 物理约束 → 允许运行区” / “检查四个物理量能否同时成立”. draw a simple heat exchanger and boundary, qualitative only.
+Bottom line exact “依据不同，适用条件不同；联合异常不自动等于故障名称或根因。” Do not introduce generic normal-only training for every route: electrical pump route needs normal/abnormal reference histories. No invented metrics, scores or universal guarantees. This is a task overview, not four interchangeable algorithms. Mark footer “AI 讲解示意，非原书实验结果”.
+
+Edit pass:
+Edit this infographic, preserving ALL title, layout, blue/orange/teal colors and text outside the following two corrections.
+1. In 电泵关系 panel, the small bottom plot compares measured versus model-predicted PRESSURE DIFFERENCE. Change only its vertical-axis label from 流量 to 压差.
+2. In 冷凝器关系 panel, replace the overly detailed labeled heat-exchanger and bottom scatter chart with a simple, clearly legible FOUR-INPUT schematic (no extra variables): four small boxes exactly “压力 Pc”, “蒸汽流量 Dc”, “进水温度 T1”, “出水温度 T2”, arrows from all four into a rounded region box labeled “物理模型给出的允许组合”, with a small normal blue point and an outside orange point. Do not show cooling-water flow or hot-side outlet temperature; those are not the four inputs. Keep the heading and its two descriptive lines intact. Preserve every other part of the image unchanged.

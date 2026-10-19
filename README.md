@@ -65,9 +65,9 @@ tests/                           # 数据、链路、方法、指标及真实验
 
 默认例子是 [mahalanobis.py](src/iia_benchmark/tasks/multivariate/methods/mahalanobis.py)；独立替代方法和异源 CSV 的接入样例见 [test_pipeline.py](tests/test_pipeline.py)。新来源只在 `src/iia_benchmark/data/datasets/<id>/` 增加四表读取、实际支持的 Task Adapter、dataset 配置及 `data/registry.py` 登记，无需修改已有 Method、Runner 或 Task 评分。不要求补齐所有数据集—任务组合。
 
-本地数据集中存放在 `data/raw/`。TEP 和火电已有正式 Adapter；SKAB、PRONTO 目前仅准备数据，尚未接入。来源、版本、文件路径和 SHA-256 见 [数据清单](data/manifest.json)，按清单取得文件并保持目录结构后，运行 `python scripts/verify_data.py` 校验。原始数据不纳入 Git，克隆仓库后需要另行取得。
+数据集中存放在 `data/raw/` 并纳入版本管理。TEP 和火电已有正式 Adapter；SKAB、PRONTO 目前仅准备数据，尚未接入。来源、版本、文件路径和 SHA-256 见 [数据清单](data/manifest.json)，取得仓库后运行 `python scripts/verify_data.py` 校验；用途及来源说明见 [数据管理](data/README.md)。
 
-本地 `.codex/skills/industrial-alarm-systems/` 提供工业报警方法参考 skill，入口为该目录下的 `SKILL.md`；`.codex/` 不纳入 Git。
+`.codex/` 中的技能与参考资料随仓库管理。工业报警方法参考 skill 的入口为 [SKILL.md](.codex/skills/industrial-alarm-systems/SKILL.md)。
 
 单变量方法实现 [UnivariateMethod](src/iia_benchmark/tasks/univariate/methods/base.py) 的 `design`／`predict`，返回 [UnivariatePrediction](src/iia_benchmark/tasks/univariate/contracts.py)。Task 固定输出 F1、ADD、MAR、FAR、报警压缩率；无评价依据的项注明原因。火电固定回放不生成统计标签，只报告有依据的报警压缩；非 IID 方法自行生成公开统计参考材料，Task 仍负责统一评分；外部参考即使全部未知也优先保留，不用代理补未知点。
 

@@ -1,0 +1,18 @@
+Built-in image_gen; educational schematic, not experimental data.
+Use case: scientific-educational.
+Asset type: Chinese learning infographic placed at the start of Chapter 2 of a technical book study note.
+Primary request: Explain the SINGLE central task of univariate industrial alarm optimization: use one measurement's historical time series and existing alarm configuration to compare candidate settings, then choose an appropriate configuration for online alarm generation. This is NOT a diagram introducing four methods. Do not create four method columns or name algorithms.
+
+Style: clear elegant textbook illustration, landscape roughly 3:2, opaque white background, generous whitespace, crisp navy Chinese typography, blue curves, restrained orange alarm markers and teal results, legible at laptop size. Diagrams and icons should do most of the explaining; avoid large paragraphs.
+
+Main title exactly: “这一章要做什么？”
+Subtitle exactly: “用历史数据，把一支测点的报警配置调好”
+
+Composition: Three main panels joined from left to right by clear arrows.
+LEFT panel heading “已有资料”. Show a small sensor labeled “一支测点”, a single blue historical time series on axes “测量值” and “时间”, and a horizontal orange dashed line labeled “当前阈值 H0”. Below show a compact existing settings card labeled “现有报警配置”, and a small safety-range icon labeled “工艺允许范围”. A few short crossings of the line are visible. Do not mark each crossing as true abnormality.
+MIDDLE panel heading “离线比较”. Show several candidate configuration cards with legible labels “阈值 H”, “延时 n”, “死区 d”. Their position must indicate optional adjustable settings, not mandatory consecutive processing. Below the cards place exact sentence “按适用条件选择要调整的参数”. Use a compact comparison visual or balance icon, with three plainly worded evaluation labels: “正常时少误报”, “异常时尽量报出”, “及时提醒”. No numerical scores, no probabilities, no claims that all four book routes optimize identical metrics.
+RIGHT panel heading “选定配置”. Show one selected configuration card with a check mark, an arrow leading to a smaller blue online measurement curve and a simple orange alarm bell. Labels exactly “满足要求的一组配置” and “用于在线报警”.
+A subtle curved feedback arrow below the panels should link the comparison and selection with label “效果不满足要求，再调整候选”.
+Footer in small readable gray type exactly: “讲解示意：越限不等于已确认异常；减少报警也要检查漏报与延迟。”
+
+Constraints: Chinese text accurate and readable; only one measured variable, not multiple sensor traces. No four-method taxonomy, no mathematical derivations, no invented performance values, no actual experiment claims, no source-book figure numbers, no decorative pseudo-code. Explicitly illustrate an OFFLINE parameter choice leading to subsequent ONLINE alarm generation, rather than online automatic threshold adaptation.

@@ -1,0 +1,26 @@
+Built-in image_gen; educational schematic, not experimental data.
+Use case: scientific-educational. Create a NEW Chinese textbook infographic, landscape 3:2, opaque white background, navy headings, blue data curves, restrained orange highlights and teal selected results. Large readable Chinese labels, generous whitespace, clean technical illustration. Explain causal connections with diagrams and arrows rather than paragraphs. No book figure numbers, no measured performance claims, no logo. All example data must be marked as teaching examples.
+Title exactly “从历史升降走向，选择报警阈值”.
+Three linked panels, not four methods.
+LEFT heading “历史测量 → 区间编号”. Mark “讲解分区，旧阈值 H0=50℃”. Show a compact interval table: “5：47～48℃”, “6：48～49℃”, “7：49～50℃”, “8：50～51℃”. Add small note “左闭右开”. Under it a time series strip exactly “47.2 → 47.4 → 48.3 → 49.1 → 50.2” mapping to “5 → 5 → 6 → 7 → 8”. Label “区间边界由数据分区确定；编号不是故障标签”.
+CENTER heading “按时间顺序统计转移”. Show state 5 as a blue circle with arrows to 4, itself 5, and 6. Label arrows “20/100”, “50/100”, “30/100”, respectively; context “讲解计数：从 5 出发的 100 次记录”. Below distinguish one-step statistics from a permitted longer path: a green path “5 → 5 → 6 → 7 → 8” labeled “允许停留，不允许下降”; a short crossed-out red path “5 → 6 → 5” labeled “本次上升路径失败”. Do not equate 30/100 with reaching 8.
+RIGHT heading “比较提醒位置”. Draw a balance joining “继续走向旧阈值的可能性” and “到达旧阈值的提前量”. Arrow to “按选择规则确定区间” then “区间下边界 → 新报警阈值”. Do not claim these toy measurements reproduce original book probability 0.98, do not invent an optimal value or universal guarantee.
+Footer exactly “讲解示意：需要足够样本、适用的状态转移模型，以及工艺允许的阈值范围。”
+
+--- Edit pass 1 ---
+Edit this Chinese educational infographic. Preserve its three-panel layout, title, white background, blue/orange colors, legible typography, interval table and correct central counts/paths.
+Correct a conceptual error in the TOP RIGHT orange box about lead time. Replace its current body about counting remaining intervals with EXACT text:
+“平均转移步数 × 采样周期”
+“需要结合停留与转移概率计算”
+Keep its heading “到达旧阈值的提前量”. The figure must NOT equate lead time with the number of crossed intervals; remove any text saying remaining interval count or three intervals to state 8.
+In the BOTTOM RIGHT number line, make the new threshold illustration agree with the actual interval lower-bound rule: illustrate selecting STATE 5, highlight interval [47,48) instead of state 8, arrow at 47℃, and use exact caption “若选中状态 5，新阈值为 47℃（示例）”. This is an illustration, not a claim of optimality for the toy data.
+In the LEFT small temperature plot, show exactly FIVE data dots in time order with values 47.2,47.4,48.3,49.1,50.2, consistent with its already correct data table. Keep H0=50℃ horizontal dashed line. Only the last dot should be above that line. Avoid adding an extra dot at 50.
+Everything else should remain unchanged, especially central arrow labels 20/100,50/100,30/100, success path 5→5→6→7→8, failed path 5→6→5, and the warning that 30/100 is one-step probability, not probability of reaching 8.
+
+--- Edit pass 2 ---
+Make one small change to this infographic and keep ALL OTHER CONTENT EXACTLY unchanged.
+In the LEFT COLUMN only, remove the small blue temperature line chart and its axes, which sit between the label 历史测量示例 and the numerical data table. Replace that chart area with a very simple three-node conversion schematic, in navy/blue:
+“原始测量值” → “按区间查表” → “状态编号”
+Use three small legible connected boxes arranged within that left-column chart area, with NO plotted curves or points and NO axes.
+Keep the interval table above and the numeric data table below unchanged, including 47.2,47.4,48.3,49.1,50.2 mapping to 5,5,6,7,8.
+Preserve the corrected upper right lead-time wording 平均转移步数 × 采样周期, and preserve bottom right selection of state 5 with new threshold 47℃. Do not change the center state-transition diagram or any other labels.

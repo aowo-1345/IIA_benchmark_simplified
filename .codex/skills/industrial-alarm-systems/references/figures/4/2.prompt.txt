@@ -1,0 +1,12 @@
+Use case: scientific-educational. Chinese textbook explanation infographic, white background, landscape, navy large headings, blue arrows, orange selected edges, generous whitespace.
+Title “信息流：先问有没有帮助，再排除中介”.
+LEFT heading “加入 X 的过去，有助于判断 Y 吗？” Show target Y future as a question box. Two comparison cards “只看 Y 自己的过去” and “再加入 X 在此前一段时间是否报警”. Arrows to “若不确定性减少，得到 X→Y 的信息量”. Label “允许传播延迟变化，不只看一次谁先报警”. No fake probabilities or magnitude.
+CENTER heading “先排除偶然估计” Show actual pair of two small binary timelines labeled “真实报警历史”; below two unaligned binary timelines labeled “无关联替代序列”. Both lead to comparative dials labeled “真实 NTE” and “替代数据阈值”. Output exact “超过显著性阈值，才保留候选边”. Note “替代序列保留长度与报警概率”.
+RIGHT heading “X→Z 是直接，还是经过 Y？” Two small graphs one above another. Upper graph has blue solid edges X→Y, Y→Z and an orange dashed X→Z, label “NTE 可能同时看到三条联系”. Lower graph has ONLY X→Y and Y→Z, caption “考虑 Y 后，X→Z 若不再显著，就去掉这条边”. Label method “NDTE：相对于所选中介检查直接关系”.
+Footer exact “AI 讲解示意：这是统计信息流筛查；遗漏变量和模型条件仍会影响解释。” Do not imply conditional value must always vanish or prove physical causality. No real score numbers, no arbitrary cutoff.
+
+Edit pass:
+Edit ONLY the surrogate-data wording in the CENTER panel. Preserve all layout, diagrams, colors and ALL other wording.
+Replace subtitle “无关联替代序列（打乱配对的示例）” by “无关联替代序列（独立随机生成）”.
+Replace explanatory sentence “替代序列保留长度与报警概率，但打乱时间对应关系，使两者无关联。” by EXACT sentence “按各自的报警概率独立生成 0/1 序列，保留长度，破坏变量间关联。”
+Do not describe a permutation or shuffle algorithm: the book generates independent Bernoulli alarm sequences. Do not change the TE or NDTE panels.

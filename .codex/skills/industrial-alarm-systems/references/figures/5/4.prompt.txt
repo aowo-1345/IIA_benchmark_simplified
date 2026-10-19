@@ -1,0 +1,5 @@
+Use case: scientific-educational. Chinese textbook infographic landscape 3:2, opaque white, navy text, blue/teal sets and orange highlights. Readable exact data, generous whitespace. Title “频繁模式：先看共现，再去掉重复表达”.
+LEFT “每次洪泛只记出现过哪些 Tag”. Exact four-row table: “T1 {A,B}”, “T2 {A,B}”, “T3 {A,C}”, “T4 {A,C}”. Label “忽略本次内部的次序和重复次数”.
+CENTER “支持度与闭合”. Exact labels “支持度：出现于几次洪泛”, “{B}：2 次”, “{A,B}：2 次”. Show arrow from B to AB caption “更大的集合支持度不变，{B} 不闭合”. Below cards “保留：{A} 4 次”, “{A,B} 2 次”, “{A,C} 2 次”. Note “本例最小支持次数为 2”.
+RIGHT “再合成代表模式”. Two set tokens “{A,B}” and “{A,C}”, arrow into “相似度 = 1/3”, then union “代表集合 {A,B,C}”. Exact warning “这是相似模式的概括；四次历史里都没有三者一起出现”. Add “仍须保留原模式和 TID，回查实际事件”.
+Footer exact “AI 讲解示意：共现模式不保留顺序；代表集合的历史关联不等于它本身的支持度。” No automatic alarm suppression, no probabilities or invented experiment performance.

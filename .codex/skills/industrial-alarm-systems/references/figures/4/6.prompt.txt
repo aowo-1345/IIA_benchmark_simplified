@@ -1,0 +1,14 @@
+Use case: scientific-educational. New Chinese teaching infographic, landscape 3:2, white background, navy headings, blue and orange curves, teal outputs, large labels and whitespace.
+Title “关键变量变了：按时段分析谁在推动变化”.
+Three connected panels.
+LEFT “先按关键变量 y 分段”. Draw a noisy blue timeline y with three obvious segments: flat, rising, flat, orange straight fitted line over each and dashed vertical split markers. Label “PLR：用短直线表示局部趋势”. Below a short note “变化超过噪声水平，才分析该段原因”.
+MIDDLE “把影响变量对齐后比较”. Draw two small blue traces labeled x1 and x2, and small y trace below. Use a simple dashed vertical event at earlier x1 time and later y time with horizontal arrow “考虑传播时延”. Then boxes “归一化，统一比较尺度” and “结合上升 / 下降方向，拟合该段变化”. Do not assume every influence must move same raw direction as y.
+RIGHT “输出每段贡献”. Show two stacked horizontal bars with exact teaching numbers: “片段 A：x1 80% | x2 20%” and “片段 B：x1 20% | x2 80%”. Clearly label “讲解比例，非原书实验结果”. Add “主要影响因素可以随时段变化” and “这是对 y 变化的模型解释”.
+Footer exact “AI 讲解示意：需先有关键变量与候选影响变量；贡献比例不是故障概率或因果证明。” No black-box automatic physical graph learning, no universal prediction claims.
+
+Edit pass:
+Make only these precision corrections. Keep ALL diagrams, curves, layout, colors and other text unchanged.
+1. In LEFT timeline, replace the labels “片段 A（稳定）”, “片段 B（上升）”, “片段 C（稳定）” with “稳定段”, “上升段”, “稳定段”. Do not label them A or B, because contributions are not estimated for stable segments.
+2. In RIGHT panel rename the two bars “变化片段甲：x1 80% | x2 20%” and “变化片段乙：x1 20% | x2 80%”. Replace the parenthetical caption with “另外两个显著变化片段的讲解比例，非原书实验结果”. The example bars must not be tied to the flat segment on the left.
+3. Under “归一化，统一比较尺度”, replace the parenthetical text by EXACT “按各变量的显著变化幅度阈值缩放”. Do not offer standard deviation or arbitrary range scaling; the book uses its significance amplitude thresholds.
+Keep everything else intact.

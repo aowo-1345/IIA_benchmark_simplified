@@ -1,0 +1,9 @@
+Use case: scientific-educational. Chinese textbook infographic, landscape 3:2, white opaque background, navy text, blue/teal alarm tokens, orange highlights, generous whitespace. Title “洪泛检测：既不重复数抖动，也不一直数滞留”.
+Top two contrast cards: “只数发生次数” shows A A A A A, caption “同一 Tag 抖动，次数会很多”; “只数仍在报警的 Tag” shows old held C, caption “旧报警可能持续占据每个窗口”.
+Bottom main panel “Criterion C 的一个集合更新例子（预处理后）”. Three input cards exact:
+“近期 10 分钟新发生过：{A,E}” with note “A 即使已解除，也仍属于本窗新发生”;
+“上次已关注，且本窗整段仍在报警：{B,C}”;
+“已经连续报警至少 30 分钟：{C}”.
+Arrows: second minus third gives “继承仍需关注的：{B}”; first union that gives “本次关注集合 I={A,B,E}”.
+Output “数不同 Tag：3 个” and “按书中 10 个判据，本例未达洪泛”. State “示例阈值与时间单位需按应用核对”.
+Footer exact “AI 讲解示意：集合更新需要历史状态；仅对当前窗口去重还不够。” No suggestion suppressed alarms physically disappear; only remove from flood counting.

@@ -1,0 +1,16 @@
+Use case: scientific-educational. Chinese educational infographic landscape 3:2, white opaque background, navy headings, blue alarm intervals, orange action marks, teal recovery, large readable text, clean spacing.
+Title “响应图：把一次报警拆成可比较的时间”.
+Top note “讲解例：每次发生对齐到 0 秒；ACK 是确认，ACTION 才是这里比较的操作动作”.
+Two separate horizontal event rows with event labels and exact relative timestamps:
+“事件 1” : “ALM 0秒” → “ACK 10秒” → “ACTION 20秒” → “RTN 50秒”.
+“事件 2” : “ALM 0秒” → “ACK 10秒” → “ACTION 50秒” → “RTN 70秒”.
+Draw an alarm-active bar from ALM to RTN in EACH row; end it exactly at RTN, with nothing beyond it. Do not compare absolute calendar times. Positions should preserve chronological order; all numeric interpretations are in the table below.
+Bottom exact table columns “事件”, “确认等待”, “动作等待”, “动作后至解除”, “总报警时长”. Row1 “1 | 10秒 | 20秒 | 30秒 | 50秒”. Row2 “2 | 10秒 | 50秒 | 20秒 | 70秒”.
+Add short interpretation “事件 2 动作更晚，但动作后至解除更短；不能只看总时长判断响应效率”.
+Footer exact “AI 讲解示意：先明确比较哪一种响应；动作后恢复不等于已证明动作造成恢复。” No generic guaranteed sequence for every real event, no measured experiment claim.
+
+Edit pass:
+Correct the orange timing annotations only. Preserve ALL event timestamps, bars, table, title, colors and other content.
+The orange “动作等待” is measured from ALM at 0 seconds, NOT from ACK. The existing orange horizontal arrows incorrectly begin at ACK.
+REMOVE the two orange horizontal double-headed arrows entirely. Keep the numeric text 20秒 and 50秒 but replace their labels with “动作等待（从 ALM 计时）”. Do not draw replacement arrows; the timestamps and table already show the correct durations.
+Keep blue confirmation-wait arrows and green action-to-clear arrows unchanged. Do not change any numbers.

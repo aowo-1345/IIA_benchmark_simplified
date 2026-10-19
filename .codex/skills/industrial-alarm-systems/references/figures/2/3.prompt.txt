@@ -1,0 +1,20 @@
+Generation: built-in image_gen; generated 2026-10-18.
+Purpose: explanatory illustration for chapter 2, not a source-book figure or an experiment result.
+The PNG is a conceptual illustration; curves and sample locations are not computed measurements.
+
+Use case: scientific-educational.
+Create one clean, precise Chinese teaching infographic for a beginner studying industrial univariate alarm design. White background, restrained blue/orange/gray colors, flat technical teaching style, crisp large simplified Chinese text, no decorative icons, no photorealism, no dense prose. Portrait layout, approximately 1536x2048. The image must teach an actual data transformation through aligned plots and arrows, not merely show boxes with jargon. Title exactly: "一条历史数据，怎样变成正常、异常参考？"
+Subtitle exactly: "高报警示例 · 示意数据，非原书实验图"
+
+Use three large numbered horizontal panels stacked vertically, with generous whitespace and large legible plots:
+Panel 1 title "① 先找到变化的位置".
+Show ONE continuous sampled measurement time series across time t. First long region fluctuates around 95, second long region around 110, third shorter region fluctuates around 100.1. Horizontal red dashed current reference threshold at 100, clearly labeled "当前参考 H0=100". Show two vertical dotted boundaries at the changes from 95 to 110, then 110 to 100.1. Background regions blue, orange, pale gray. A few first-region individual sample peaks may exceed 100; make it clear the entire segment still centers near 95. Region labels: "A段：均值约95", "B段：均值约110", "C段：均值约100.1". Axes "测量值" and "时间". Short caption: "Pettitt：找出前后整体水平发生变化的位置". DO NOT imply crossing threshold defines the change points. The segment boundaries are at changes of overall level, not every threshold crossing.
+
+Panel 2 title "② 再判断每一段属于哪组".
+Show A, B, C as three aligned small cards containing mini sample-dot strips and a visible mean dot with reference tick at 100. Blue A: "均值明显低于100" then "正常参考"; orange B: "均值明显高于100" then "异常参考"; gray C: "靠近100，证据不足" then "暂不使用". C must have visibly greater dispersion, with a short enough sample strip; this is conceptual, do not print p values or invented test statistics. Short caption exactly: "t检验：均值差是否足够大？同时看波动和样本量". A small note: "分类需要工艺知识认可这个参考值".
+
+Panel 3 title "③ 汇集段内原始点，得到两条分布".
+Two side-by-side histograms with smooth curves. A BLUE arrow brings the A segment's raw measurement dots into the normal histogram centered near 95. An ORANGE arrow brings the B segment's raw measurement dots into the abnormal histogram centered near 110. Gray C ends at a gray stop symbol marked "不参与估计", do NOT feed C into either distribution. Both histogram horizontal axes are measurement value, NOT time, and visibly show ticks 90,95,100,105,110,115. Label blue curve "q(x)：正常时，哪些数值常出现", orange curve "p(x)：异常时，哪些数值常出现". Curves are estimated sample distributions, no claim of a particular theoretical distribution. Short caption: "先按数值统计样本，再用KDE平滑成曲线". Emphasize with short bold sentence: "用于估计分布的是段内原始点，不是几个段均值".
+
+Bottom final light background strip, visually separate from reference building: "参考分组固定后 → 再比较候选阈值 H 和延时 n". Under it, small concise footer: "H0用于建立参考；H、n是之后要比较的配置。"
+All mathematical/data labels must be consistent. Do not show thresholds changing segment labels during candidate search. Do not present estimated reference groups as independently verified fault ground truth. Keep all text concise and readable, use the exact required Chinese labels, no watermark.

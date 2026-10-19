@@ -1,0 +1,6 @@
+Use case: scientific-educational. New landscape Chinese textbook infographic, white opaque background, navy headings, blue signal traces, teal normal and orange alarm, large readable text and whitespace. Title “变化方向：先估趋势，再查工艺规则”.
+Three connected panels:
+LEFT “规则从哪里来？” Simple water tank with inlet, outlet and water level, labeled only “水位 H” and “出流 Fo”. Below text exactly “本例正常关系：水位升高，出流也应增大” and “规则来自工艺，不是算法自动发现”. Two compact rule rows “H↑、Fo↓ → 报警” and “H↓、Fo↑ → 报警”. These rows are the example rules, not every possible abnormal pattern.
+MIDDLE “怎样从噪声中看出方向？” Draw one noisy blue rising time trace and a smooth local fitted rising line. Show two small window brackets labeled “平缓时看长一些” and “变化快时看短一些”. Label “ATG：自适应估计时间梯度” and “只使用当前及过去数据”. No numerical slopes or extra equations.
+RIGHT “当前组合怎样决定报警？” Three boxes in order “估计各变量梯度” → “分成 ↑、基本不变、↓” → “检查是否命中规则表”. Below example cards, exact text “水位↑、出流↑：未命中本例规则” and “水位↑、出流↓：命中，报警”. Small note “接近零的梯度先视为基本不变，避免噪声触发”.
+Bottom exact “AI 讲解示意：方向报警依赖工艺规则与趋势估计；不是所有方向不同都报警。” Do not claim to classify physical fault types; no invented performance values.

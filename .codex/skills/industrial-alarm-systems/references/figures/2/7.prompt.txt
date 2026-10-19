@@ -1,0 +1,8 @@
+Built-in image_gen; educational schematic, not experimental data.
+Use case: scientific-educational. Create a NEW Chinese textbook infographic, landscape 3:2, opaque white background, navy headings, blue data curves, restrained orange highlights and teal selected results. Large readable Chinese labels, generous whitespace, clean technical illustration. Explain causal connections with diagrams and arrows rather than paragraphs. No book figure numbers, no measured performance claims, no logo. All example data must be marked as teaching examples.
+Title exactly “不要求 IID：从历史连续段评估延时”.
+Show how the SAME symmetric delay timer acts on two different reference conditions. These are separate examples, not a normal/abnormal detector.
+Top band label “正常参考历史”. Draw a time-ordered discrete blue measurement curve with evenly spaced sample dots around an orange horizontal threshold “H”. Include one isolated above-H run of exactly 2 sample points and another isolated above-H run of exactly 4 points, each surrounded by at least 3 below-H points. Brackets label “连续越限 2 点” and “连续越限 4 点”. An arrow marked “候选 n=3” leads to two compact result labels: “2 点段：不发生报警” and “4 点段：第 3 点发生报警”. No alarm before the third above-threshold dot.
+Middle band label “异常参考历史：报警已激活”. Draw an above-H signal briefly dipping below H for exactly 2 equally spaced sample dots then returning above H. Bracket “连续回落 2 点”. Arrow marked “连续 3 点回落才解除” leads to an alarm-state line staying at 1 across this gap, label “保持已有报警”.
+Bottom connected explanation: “先收集所有连续段长度” → “再比较每段是否达到 n” → “换 H 或 n，重新比较候选”. A small row shows “Th：正常期越限长度” and “Tl：异常期回落长度”.
+Footer exactly “讲解示意：原始段的过滤比例，不等于完整重放后的事件数比例；首次报警仍需等待。”

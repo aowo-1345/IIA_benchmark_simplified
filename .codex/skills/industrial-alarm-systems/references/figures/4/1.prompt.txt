@@ -1,0 +1,7 @@
+Use case: scientific-educational. New landscape Chinese textbook overview infographic, white opaque background, large navy Chinese headings, blue/teal and orange accents, uncluttered.
+Title “这一章要做什么？” Subtitle “报警发生以后：从传播关系缩小范围，再分析可能原因”.
+Two separate horizontal lanes, NOT a guaranteed automatic pipeline.
+Upper lane heading “历史上，变量之间怎样传播？” Left two input cards “二值报警序列” and “连续过程时序” each lead to method labels “NTE / NDTE” and “信息粒 + IGTE / IGDTE”. Both lead to a small graph of three nodes X→Y→Z with caption “输出：有方向的信息流关系”. Add note “关系图用于缩小排查范围”.
+Lower lane heading “这次变化，哪些已知因素在起作用？” Left two input cards “已知候选原因 + 子报警” and “关键变量 + 已知影响变量” lead separately to method labels “递归贝叶斯网络” and “分段趋势与贡献分析”. Outputs exactly “可能的原因组合” and “各时段的主要影响因素”. Draw simple parent nodes into an alarm node for first; segmented timeline with varying bars for second.
+Between lanes small text “还需要工艺知识、观测与具体事件证据”, no arrow claiming learned graph automatically supplies all root causes.
+Footer exact “AI 讲解示意：信息流关系、当前原因与物理因果不是同一个结论。” No percentages, no invented source-book experiment, no software code or detailed formulas.

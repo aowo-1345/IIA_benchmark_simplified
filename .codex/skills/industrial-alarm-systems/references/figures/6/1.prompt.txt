@@ -1,0 +1,13 @@
+Use case: scientific-educational. Chinese textbook infographic, landscape 3:2, opaque white background, navy headings, blue/teal and orange highlights, generous whitespace, large readable labels. Title “这一章要做什么？” Subtitle “把报警日志与分析结果，变成能追查问题的图”.
+Top narrow sequence “发生 ALM → 确认 ACK → 操作 ACTION → 解除 RTN”, with note “事件含义先分清；确认不等于解除”. Arrow into small card “按 Tag、设备、时段整理并计算”.
+Three independent lower panels, not a sequence:
+1 “负担主要来自哪里？” Draw a small treemap and a time×Tag heatmap. Labels “控制台 / 装置 / Tag”, “发生次数、持续与间隔”. Below “从总体下钻到具体记录”.
+2 “哪些报警相关，怎样响应？” Draw a small symmetric heatmap plus three simple horizontal alarm-duration bars with response tick marks. Labels “相关矩阵” and “发生—动作—解除”. Below “比较联系、响应等待与恢复时间”.
+3 “洪泛何时出现，是否重复？” Draw a burst-count timeline and a simple spiral with highlighted arcs, label “洪泛时间段” and “相似历史与日内周期”. Below “找集中时段和重复模式”.
+Footer exactly “AI 讲解示意：每种图先读坐标、颜色和计数口径，再回日志核对；图形不自行证明因果。” No invented metrics or claims about actual project performance. Avoid detailed numerical charts that could look measured.
+
+Edit pass:
+Edit ONLY two precision issues in this infographic, keeping all other layout, colors and wording unchanged.
+1. TOP row of event types: remove arrows BETWEEN the ALM, ACK, ACTION, RTN cards. They are event categories, not a required chronological sequence. Keep arrow toward the database. Replace the small note below the four cards by “事件类型示例，顺序与缺失依日志而定；确认不等于解除”.
+2. CENTER correlation matrix: preserve its A–F row/column labels and orange-high/blue-low color scale. Make all SIX main-diagonal cells orange (maximum self-correlation). Make the matrix symmetric across the main diagonal: each off-diagonal mirrored pair must have identical color. Do not add numbers or change the matrix size.
+All other parts remain unchanged.

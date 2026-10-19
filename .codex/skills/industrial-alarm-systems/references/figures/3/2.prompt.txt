@@ -1,0 +1,26 @@
+Generation: built-in image_gen; generated 2026-10-18.
+Purpose: conceptual teaching illustration for chapter 3, based on section 3.1; not a source-book figure or experiment result.
+Numeric relationships and plotted points are illustrative, not calculated measurements.
+
+Use case: scientific-educational.
+Create one Chinese teaching infographic for an industrial alarm textbook chapter. Beginner audience. Purpose: clearly explain why a combination of two measurements can be abnormal even though neither exceeds fixed limits, and how a joint normal region yields dynamic limits. Crisp, large Simplified Chinese typography, white background, navy headings, blue for normal historical data and normal region, red/orange for the abnormal combination, pale gray for independent fixed ranges. Technical teaching graphic with real coordinate plots and arrows; no decoration, no photorealism, no dense paragraphs. Portrait approximately 1536x2048.
+
+Title exactly: "单点没越限，为什么还会联合报警？"
+Subtitle exactly: "联合正常区 NOZ 与动态限值 · 讲解示意"
+
+Three numbered panels, vertically stacked, generous whitespace.
+
+Panel 1 title: "① 分开检查：两个值都在固定范围内".
+Two simple horizontal range bars on a shared numerical scale with clear endpoints 20 and 80. First bar "测点 x1 = 70", marker at 70; second "测点 x2 = 30", marker at 30. Both green checkmarks and label "单点检查通过". Show the same current measurement pair "(70, 30)" being assembled from the two bars with arrows. The numbers are unitless illustrative values, do not invent units or equipment.
+
+Panel 2 title: "② 放在一起：检查它们的搭配关系".
+Large Cartesian plot. Horizontal axis "测点 x1", vertical axis "测点 x2"; both axes 0 to 100 with labeled ticks 0,20,40,60,80,100. Draw a pale gray dashed square from x1=20 to80, x2=20 to80 labelled "单点固定范围". Within it show a BLUE narrow diagonal polygonal normal operating band centered on y=x, approximately between y=x-10 and y=x+10, truncated to the square. Show many small blue historical normal points scattered INSIDE the diagonal band. Label "正常历史点 → 联合正常区 NOZ". Plot the current pair B=(70,30) as one prominent RED star clearly INSIDE the gray square but FAR BELOW and OUTSIDE the blue diagonal band. A callout arrow must point exactly to this red star with text "B=(70,30)：组合异常". Also show a blue filled point A=(40,40) INSIDE the blue band labelled "A=(40,40)：正常组合". No normal blue points at the red star. Large takeaway below: "报警依据：当前组合是否落在正常区内".
+
+Panel 3 title: "③ 从同一区域读出动态限值".
+Two small aligned coordinate diagrams side by side, showing the SAME diagonal normal band and identical axes. Left: vertical slice at x1=40 crosses blue band at x2=30 and x2=50; highlight blue vertical bracket, clear callout "x1=40 时" and "x2 允许范围：30–50". Right: vertical slice at x1=60 crosses the same band at x2=50 andx2=70; highlight bracket with "x1=60 时" and "x2 允许范围：50–70". These must be vertical slices fixing x1, not horizontal slices. Show that the blue normal region itself has not changed between the two diagrams. Label below: "其他测点的当前值不同，这个测点的允许范围也不同".
+
+Footer in two clear short lines:
+"工艺选测点 → 正常历史建区域 → 新数据判断组合"
+"图中关系与数值仅作讲解，非原书实验或故障诊断结论"
+
+Maintain all numerical geometry precisely: B70,30 is not inside the blue band; A40,40 is inside. Dynamic intervals in panel3 exactly match the band y=x±10. The dynamic-limit slices illustrate normal in-region configurations; do not imply that every out-of-region point has a valid direct slice. No fitted performance claims, no FAR percentages, no ground truth claim. All Chinese labels concise, legible, no watermark.
