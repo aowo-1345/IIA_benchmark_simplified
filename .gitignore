@@ -6,3 +6,16 @@ __pycache__/
 .codex/
 data/raw/
 experiments/runs/
+
+.scratch/
+.idea/
+.envrc
+.envrc.*
+.agents/
+docs/reviews/
+
+# 本地文档与汇报材料不纳入版本管理；仅保留设计文档。
+*.md
+!docs/design.md
+*.ppt
+*.pptx
