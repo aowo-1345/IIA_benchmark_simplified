@@ -5,7 +5,7 @@ __pycache__/
 .venv/
 .codex/
 data/raw/
-experiments/runs/
+/experiments/
 
 .scratch/
 .idea/
@@ -14,9 +14,10 @@ experiments/runs/
 .agents/
 docs/reviews/
 
-# 本地文档与汇报材料不纳入版本管理；保留项目说明和设计文档。
+# 本地文档与汇报材料不纳入版本管理；保留项目说明、共享约定和设计文档。
 *.md
 !/README.md
+!/AGENTS.md
 !docs/design.md
 *.ppt
 *.pptx
